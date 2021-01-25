@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 function CardProduct(props) {
-  
+
   return(
         <span>
         <Card style={{height:"400px", width: "300px"}}>
@@ -15,6 +15,6 @@ function CardProduct(props) {
         </Card>
       </span>
     );
-} 
+}
 
 export default CardProduct;

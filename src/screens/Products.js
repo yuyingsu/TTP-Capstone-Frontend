@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { nextPage,fetchAllProduct } from './actions';
-import CardProduct from './CardProduct';
+import { nextPage,fetchAllProduct } from '../actions/productActions';
+import CardProduct from '../components/CardProduct';
 import { Container, Row, Col } from 'reactstrap';
 import { Pagination, PaginationItem } from 'reactstrap';
 
@@ -44,7 +44,7 @@ class Product extends Component {
         <Col xs="12" s="6" m="3" l="3" xl="3">
         <CardProduct price={product.price} countInStock={product.countInStock}
         rating={product.rating} numReviews={product.numReviews} id={product._id}
-        name={product.name} image={product.image} brand={product.brand} 
+        name={product.name} image={product.image} brand={product.brand}
         category={product.category} description={product.description}
         reviews={product.reviews} key={product._id}/>
         </Col>
@@ -84,7 +84,7 @@ class Product extends Component {
             <PaginationItem>
             <button onClick={this.goToLast}>Last</button>
             </PaginationItem>
-            </Pagination>      
+            </Pagination>
         </div>
     );
   }

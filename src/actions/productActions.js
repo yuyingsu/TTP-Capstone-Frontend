@@ -1,4 +1,4 @@
-import { FETCH_PRODUCT_PAGE, FETCH_ALL_PRODUCT} from './types';
+import { FETCH_PRODUCT_PAGE, FETCH_ALL_PRODUCT} from '../constants/productConstants';
     export const nextPage = (page) => dispatch => {
         fetch('http://localhost:5000/api/products?page='+page)
           .then(res => res.json())
@@ -19,5 +19,4 @@ import { FETCH_PRODUCT_PAGE, FETCH_ALL_PRODUCT} from './types';
             })
           ).catch(error => console.log(error));
       }
-      
-      
+
