@@ -1,11 +1,11 @@
 import "./App.css";
 import Product from "./screens/Products";
-import Home from "./components/Home.jsx";
+import GamePage from "./components/GamePage.jsx";
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <GamePage name="Sekiro" developer="From Software" />
       {/* <Product/> */}
     </div>
   );
