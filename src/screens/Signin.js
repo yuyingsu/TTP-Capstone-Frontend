@@ -23,8 +23,6 @@ function Signin(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email)
-    console.log(password)
     dispatch(signin(email, password));
   }
 
