@@ -1,6 +1,6 @@
 import './App.css';
 import { Header } from './components'
-import { Home, Register, Signin } from './screens/';
+import { Home, Register, Shipping, Signin } from './screens/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
         <div className="App">
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/shipping" component={Shipping} />
           <Route exact path="/signin" component={Signin} />
         </div>
       </BrowserRouter>
