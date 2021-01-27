@@ -38,7 +38,7 @@ function Home(props){
       if(!loading && productList){
       res = productList.map((product) => (
 
-        <Col xs="12" s="6" m="3" l="3" xl="3">
+        <Col>
         <CardProduct price={product.price} countInStock={product.countInStock}
         rating={product.rating} numReviews={product.numReviews} id={product._id}
         name={product.name} image={product.image} brand={product.brand}
@@ -50,13 +50,17 @@ function Home(props){
         <div>Loading...</div>
       }
       return(
-          <>
-            <SearchBox submitSearchTerm={submitSearchTerm}/>
-
-                {res}
+          <><Container>
+            <Row>
+              <SearchBox submitSearchTerm={submitSearchTerm}/>
+            </Row>
+            <Row>
+              {res}
+            </Row>
 
             {products.length > 3 &&
             <Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/>}
+            </Container>
         </>
       )
     }
