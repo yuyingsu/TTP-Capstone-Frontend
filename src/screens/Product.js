@@ -1,32 +1,31 @@
 import React, { Component } from "react";
 import './Product.css'
-
+import { connect } from 'react-redux';
 class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      details: "",
+      qty:0
     };
 
   }
 
-
   handleAddToCart = (e) => {
     e.preventDefault();
-    const qty = 5;
-    this.props.history.push('/cart/' + this.props.match.params.id + '?qty=' + qty);
+    this.props.history.push('/cart/' + this.props.match.params.id + '?qty=' + this.state.qty);
   };
 
-  handleFavorites = (e) => {
-    e.preventDefault();
+  setQty = (qty) => {
+    this.setState({qty:qty});
   };
 
   render() {
+    let product = this.props.cps.find(product => product._id == this.props.match.params.id);
     return (
       <div>
         <div className="title">
           <h1>
-            {/*this.state.details.name*/}
+            {product.name}
             <span>1st Edition</span>
           </h1>
         </div>
@@ -36,7 +35,7 @@ class Product extends Component {
           </h2>
         </div>
         <div className="photo-gallery">
-          <img alt="game pic" />
+          <img src={product.image} alt="game pic" />
         </div>
         <div className="product-table">
           <table>
@@ -45,7 +44,7 @@ class Product extends Component {
               <th>{/*this.state.details.developer*/}</th>
             </tr>
             <th>Rating</th>
-            <th>{/*this.state.details.rating*/}</th>
+            <th>{product.rating}</th>
             <tr>
               <th>Platform(s)</th>
               <th>{/*this.state.details.platform*/}</th>
@@ -56,24 +55,26 @@ class Product extends Component {
             </tr>
             <tr>
               <th>Price</th>
-              <th>{/*this.state.details.price*/}</th>
+              <th>{product.price}</th>
             </tr>
           </table>
         </div>
         <div className="cartbttn">
           <div>
-            <button type="button" onClick={this.handleFavorites}>
-              Add to Favorites
-            </button>
             <button type="button" onClick={this.handleAddToCart}>
               Add to Cart
             </button>
+            <select onChange={(e)=>{this.setQty(e.target.value)}}>
+            {[...Array(product.countInStock).keys()].map(x =>
+                        <option key={x + 1} value={x + 1}>{x + 1}</option>
+                      )}
+            </select>
           </div>
         </div>
         <div className="game-description">
           <div>
             <h1>Game Description</h1>
-            <p>{/*this.state.details.description*/}</p>
+            <p>{product.description}</p>
           </div>
         </div>
       </div>
@@ -81,4 +82,10 @@ class Product extends Component {
   }
 }
 
-export default Product;
+const mapStateToProps = state => {
+  return {
+      cps: state.pds.products
+  }
+};
+export default connect(mapStateToProps, null)(Product);
+
