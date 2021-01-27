@@ -45,7 +45,7 @@ function Product(props) {
     props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
   };
 
-  console.log("product" + JSON.stringify(product))
+  //console.log("product" + JSON.stringify(product))
     return (
       <div>
       {loading ? (
@@ -109,6 +109,14 @@ function Product(props) {
             <p>{product.description}</p>
           </div>
         </div>
+        <div className="product-reviews">
+        <a href="#reviews">
+                    <Rating
+                      value={product.rating}
+                      text={product.numReviews + ' reviews'}
+                    />
+                  </a>
+        </div>
       </div>
       <div className="content-margined">
             <h2>Reviews</h2>
@@ -118,6 +126,7 @@ function Product(props) {
                 <li key={review._id}>
                   <div>{review.name}</div>
                   <div>
+                    {console.log(JSON.stringify(review))}
                     <Rating value={review.rating}></Rating>
                   </div>
                   <div>{review.createdAt.substring(0, 10)}</div>
@@ -137,11 +146,11 @@ function Product(props) {
                           value={rating}
                           onChange={(e) => setRating(e.target.value)}
                         >
-                          <option value="1">1- Poor</option>
-                          <option value="2">2- Fair</option>
-                          <option value="3">3- Good</option>
-                          <option value="4">4- Very Good</option>
-                          <option value="5">5- Excelent</option>
+                          <option value="1">1 - Poor</option>
+                          <option value="2">2 - Fair</option>
+                          <option value="3">3 - Good</option>
+                          <option value="4">4 - Very Good</option>
+                          <option value="5">5 - Excellent</option>
                         </select>
                       </li>
                       <li>
