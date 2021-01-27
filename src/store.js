@@ -22,6 +22,7 @@ const rootReducer = combineReducers({
   pds: productReducers,
   userSignin: userSigninReducer,
   userRegister: userRegisterReducer,
+  userUpdate: userUpdateReducer
 });
 
 const storeEnhancers = window.REDUX_DEVTOOLS_EXTENSION_COMPOSE || compose;
