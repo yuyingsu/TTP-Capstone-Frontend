@@ -1,0 +1,65 @@
+div {
+  background-color: rgb(249, 252, 255);
+  color: black;
+}
+
+img {
+  float: left;
+  margin: 10px;
+}
+h1 {
+  text-align: left;
+  margin: 10px;
+}
+
+.product-table {
+  padding-top: 3em;
+  float: left;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  background-color: #8a8b9469;
+}
+
+td,
+th {
+  border: 1px solid #cdcdcd;
+  text-align: left;
+  padding: 8px;
+}
+
+p {
+  font-size: 16px;
+}
+.cartbttn {
+  float: right;
+  padding-right: 20em;
+  padding-top: 5em;
+}
+.cartbttn button {
+  background-color: rgba(214, 226, 255, 0.502);
+  border: none;
+  padding: 10px 20px;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  border: 2px solid #4caf50;
+  border-radius: 6px;
+  float: right;
+}
+
+.cartbttn button:hover {
+  background-color: rgb(255, 217, 0);
+}
+.game-description h1 {
+  text-align: center;
+}
+.game-description div {
+  float: center;
+  width: 40%;
+  padding-right: 2em;
+}
