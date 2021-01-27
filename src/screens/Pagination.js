@@ -38,7 +38,7 @@ class Pagination extends Component {
     ));
     return (
         <div>
-            <Pagination aria-label="Page navigation example">
+            <Pagination className="pagination" aria-label="Page navigation example">
             <PaginationItem>
             <button onClick={this.goToFirst}>First</button>
             </PaginationItem>
