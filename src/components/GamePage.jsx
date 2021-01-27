@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import gamepage from "../css/gamepage.css";
 import Game from "./Game.jsx";
 import axios from "axios";
+import SimilarGames from "./SimilarGames";
+import NavigationBar from "./NavigationBar.jsx";
 
 class GamePage extends Component {
   state = {
+    //make this array of objects and display multiple games in a page?
     info: {
       name: "Sekiro: Shadows Die Twice ",
       developer: "From Software",
@@ -33,7 +36,9 @@ class GamePage extends Component {
   render() {
     return (
       <div className="game-page">
-        <Game game={this.state.info} />
+        <NavigationBar />
+        <Game game={this.state.info /*[0]*/} />
+        <SimilarGames game={this.state.info[1]} />
       </div>
     );
   }

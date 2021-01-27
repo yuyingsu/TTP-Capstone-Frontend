@@ -63,3 +63,7 @@ p {
   width: 40%;
   padding-right: 2em;
 }
+
+.availability ul {
+  list-style-type: none;
+}

@@ -18,6 +18,8 @@ class Game extends Component {
   };
 
   render() {
+    console.log(this.state.details);
+
     return (
       <div>
         <div className="title">
@@ -44,7 +46,7 @@ class Game extends Component {
             <th>{this.state.details.rating}</th>
             <tr>
               <th>Platform(s)</th>
-              <th>{this.state.details.platform}</th>
+              <th>{this.state.details.platforms}</th>
             </tr>
             <tr>
               <th>Release</th>
@@ -64,6 +66,16 @@ class Game extends Component {
             <button type="button" onClick={this.handleAddToCart}>
               Add to Cart
             </button>
+
+            <div className="availability">
+              <h5>Available at the follwing stores:</h5>
+              <ul>
+                <li>Amazon</li>
+                <li>Walmart</li>
+                <li>Target</li>
+                <li>GameStop</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div className="game-description">

@@ -5,7 +5,7 @@ import GamePage from "./components/GamePage.jsx";
 function App() {
   return (
     <div className="App">
-      <GamePage name="Sekiro" developer="From Software" />
+      <GamePage />
       {/* <Product/> */}
     </div>
   );
