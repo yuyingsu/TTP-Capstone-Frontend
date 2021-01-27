@@ -1,25 +1,40 @@
 import * as actionTypes from '../constants/productConstants';
 const initialState = {
     products:[],
-    productPage:[]
+    productList:[],
+    loading:true
 };
 
-const campusesReducer = ( state = initialState, action ) => {
+const productReducer = ( state = initialState, action ) => {
     switch ( action.type ) {
-        case actionTypes.FETCH_PRODUCT_PAGE:
+        case actionTypes.FETCH_PRODUCT_REQUEST:
         return {
             ...state,
-            productPage: action.payload
+            loading:true,
+            product:[]
         }
-        case actionTypes.FETCH_ALL_PRODUCT:
+        case actionTypes.FETCH_PRODUCT_PAGE_REQUEST:
+            return {
+                ...state,
+                loading:true,
+                productList:[]
+        }
+        case actionTypes.FETCH_PRODUCT_SUCCESS:
         return {
-            ...state,
-            products: action.payload
-        }
+                ...state,
+                loading: false,
+                products: action.payload
+            };
+          case actionTypes.FETCH_PRODUCT_PAGE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                productList: action.payload
+            };
         default:
         return state;
         }
 
 };
 
-export default campusesReducer;
+export default productReducer;
