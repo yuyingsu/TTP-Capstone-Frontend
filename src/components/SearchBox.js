@@ -4,7 +4,8 @@ export default function SearchBox(props) {
   const [name, setName] = useState('');
   const submitHandler = (e) => {
     e.preventDefault();
-    props.history.push(`/search/name/${name}`);
+    /*props.history.push(`/search/name/${name}`);*/
+    props.submitSearchTerm(name);
   };
   return (
     <form className="search" onSubmit={submitHandler}>
@@ -15,9 +16,10 @@ export default function SearchBox(props) {
           id="q"
           onChange={(e) => setName(e.target.value)}
         ></input>
-        <button className="primary" type="submit">
+        <button className="primary" type="submit" >
           <i className="fa fa-search"></i>
         </button>
       </div>
     </form>
   );
+}
