@@ -1,6 +1,8 @@
 import * as actionTypes from '../constants/cartConstants';
 const initialState = {
-    carts:[]
+    carts: [],
+    shipping: {},
+    payment: {}
 };
 
 const cartReducers = ( state = initialState, action ) => {
