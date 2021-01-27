@@ -12,7 +12,7 @@ function App() {
           <Route exact path="/cart" component={Cart}/>
           <Route path='/cart/:id' exact render={({match, location}) =>  <Cart match={match} location={location}/> } />
           <Route path="/product/:id" component={Product} />
-          <Route path="/profile" component={Profile} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/shipping" component={Shipping} />
           <Route exact path="/signin" component={Signin} />
