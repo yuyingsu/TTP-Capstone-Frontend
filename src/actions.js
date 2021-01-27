@@ -19,5 +19,5 @@ import { FETCH_PRODUCT_PAGE, FETCH_ALL_PRODUCT} from './types';
             })
           ).catch(error => console.log(error));
       }
-      
+      export const
       

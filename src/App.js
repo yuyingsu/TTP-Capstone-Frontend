@@ -1,10 +1,19 @@
 import './App.css';
-import Product from './Product';
-
+import Home from './screens/Home';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Cart from './screens/Cart';
 function App() {
   return (
     <div className="App">
-      <Product/>
+       <Router>
+          <div>
+            <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/cart" component={Cart}/>
+            <Route path='/cart/:id' exact render={({match, location}) =>  <Cart match={match} location={location}/> } />
+            </Switch>
+          </div>
+        </Router>
     </div>
   );
 }
