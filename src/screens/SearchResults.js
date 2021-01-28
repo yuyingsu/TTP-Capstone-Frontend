@@ -14,8 +14,8 @@ import SearchBox from '../components/SearchBox';
 import Paginations from './Paginations';
 import { Container, Row, Col } from 'reactstrap';
 import { listAllProducts,listProducts } from '../actions/productActions';
-function Home(props){
-    const [searchKeyword, setSearchKeyword] = useState('');
+function SearchResults(props){
+    const searchKeyword = props.match.params.name;
     const [sortOrder, setSortOrder] = useState('');
     const [page, setPage] = useState(1);
     const loading = useSelector(state => state.pds.loading);
@@ -24,15 +24,15 @@ function Home(props){
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(listAllProducts());
+     // dispatch(listAllProducts());
       dispatch(listProducts(page,searchKeyword,sortOrder));
       return () => {
       };
       }, [page, sortOrder, searchKeyword]);
 
-      const submitSearchTerm = (term) => {
-        setSearchKeyword(term);
-      }
+     // const submitSearchTerm = (term) => {
+     //   setSearchKeyword(term);
+      //}
 
       let res = null;
       if(!loading && productList){
@@ -61,4 +61,4 @@ function Home(props){
         </>
       )
     }
-export default Home;
+export default SearchResults;

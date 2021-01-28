@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { addToCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+
 function Cart(props) {
   const cartItems = useSelector(state => state.ct.carts);
   const productId = props.match.params.id;
@@ -20,7 +23,7 @@ function Cart(props) {
   const checkoutHandler = () => {
     console.log(props)
     props.history.push("/signin?redirect=shipping");
-    console.log(props)
+    //console.log(props)
   }
 
   return(
@@ -43,5 +46,6 @@ function Cart(props) {
   );
 }
 
+const mapStateToProps = () => {};
 
-export default Cart;
+export default withRouter(connect(mapStateToProps)(Cart));
