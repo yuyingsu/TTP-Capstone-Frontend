@@ -1,7 +1,8 @@
-
+import Axios from "axios";
+import axios from "axios";
 import { FETCH_PRODUCT_PAGE_REQUEST, FETCH_PRODUCT_PAGE_SUCCESS,
   FETCH_PRODUCT_REQUEST, FETCH_PRODUCT_SUCCESS, ADD_PRODUCT, EDIT_PRODUCT, DELETE_PRODUCT, PRODUCT_DETAILS_REQUEST,
-        PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_SAVE_REQUEST, PRODUCT_SAVE_SUCCESS, PRODUCT_SAVE_FAIL, 
+        PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, PRODUCT_SAVE_REQUEST, PRODUCT_SAVE_SUCCESS, PRODUCT_SAVE_FAIL,
         PRODUCT_REVIEW_SAVE_REQUEST, PRODUCT_REVIEW_SAVE_FAIL, PRODUCT_REVIEW_SAVE_SUCCESS
        } from '../constants/productConstants';
 
@@ -93,12 +94,12 @@ export const deleteProduct = (product) => async (dispatch, getState) => {
          type: DELETE_PRODUCT,
          payload: product
        }
-     )).catch(error => console.log(error)); 
+     )).catch(error => console.log(error));
   }
   catch(error){
 
   }
-} 
+}
 
 export const detailsProduct = (productId) => async (dispatch) => {
   try {

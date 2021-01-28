@@ -32,8 +32,11 @@ function PlaceOrder(props) {
   }
   useEffect(() => {
     if (success) {
-      props.history.push("/order/" + order._id);
+      console.log(carts, shipping, payment, itemsPrice, shippingPrice,
+        taxPrice, totalPrice)
+      //props.history.push("/order/" + order._id);
     }
+    if (loading) {console.log("still loading")}
 
   }, [success]);
 
@@ -46,7 +49,7 @@ function PlaceOrder(props) {
             Shipping
           </h3>
           <div>
-            {cart.shipping.address}<br></br>{cart.shipping.city + ", " + cart.shipping.postalCode + cart.shipping.country},
+            {cart.shipping.address}<br></br>{cart.shipping.city + ", " + cart.shipping.state + cart.shipping.zip},
           </div>
         </div>
         <div>
