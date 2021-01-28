@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState} from "react";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { SearchBox } from './'
-
+import { Dropdown, Navbar, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 function Header() {
+  const cartItems = useSelector(state => state.ct.carts);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen(prevState => !prevState);
 
   return (
     <div className="header">
@@ -20,10 +24,7 @@ function Header() {
         /></Link>
 
 
-      <div className="header__search">
-        <input className="header__searchInput" type="text" />
-        <SearchIcon className="header__searchIcon" />
-      </div>
+      <SearchBox />
 
       <div className="header__nav">
           <div className="header__option">
@@ -32,7 +33,25 @@ function Header() {
             ) : (
               "Hello, Guest"
             )}</span>
-            <span className="header__optionLineTwo">{userInfo ? (
+            <span className="header__optionLineTwo">{userInfo ?
+            (
+              userInfo.isAdmin ?
+
+              <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+              <DropdownToggle
+                tag="span"
+                data-toggle="dropdown"
+                aria-expanded={dropdownOpen}
+              >
+                Control Panel
+              </DropdownToggle>
+              <DropdownMenu>
+              <DropdownItem tag={Link} to="/profile">Profile</DropdownItem>
+                <DropdownItem tag={Link} to="/orders">Orders</DropdownItem>
+                <DropdownItem tag={Link} to="/products">Products</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            :
               <Link to="/profile">Account</Link>
             ) : (
               <Link to="/signin">Sign In</Link>
@@ -46,28 +65,10 @@ function Header() {
             <span className="header__optionLineTwo">& Orders</span>
           </div>
 
-
-
-          <div className="header-links">
-
-            {userInfo && userInfo.isAdmin && (
-              <div className="dropdown">
-                <a href="#">Admin</a>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/orders">Orders</Link>
-                    <Link to="/products">Products</Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-
-
           <div className="header__optionBasket">
           <Link to="/cart"><ShoppingBasketIcon /></Link>
             <span className="header__optionLineTwo header__basketCount">
-              1
+              {cartItems.length && cartItems.reduce((a, c) => a + c.qty, 0)}
             </span>
           </div>
 
