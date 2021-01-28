@@ -1,21 +1,23 @@
-import { ADD_TO_CART, DELETE_FROM_CART, CHANGE_QTY_IN_CART } from '../constants/cartConstants';
+import { ADD_TO_CART, DELETE_FROM_CART, CHANGE_QTY_IN_CART, CART_SAVE_SHIPPING, CART_SAVE_PAYMENT } from '../constants/cartConstants';
 import Cookie from "js-cookie";
+
 export const addToCart = (product_id, qty) =>  (dispatch,getState) => {
-    try{
-        fetch('http://localhost:5000/api/products/'+product_id).
-        then(res => res.json()).then(data =>
-        dispatch({
-            type: ADD_TO_CART,
-            payload: data,
-            qty:qty
-          })
-          );
-        const cart = getState();
-        Cookie.set("cartItems", JSON.stringify(cart));
-    }
-    catch(e){
-    }
-    }
+  try {
+    fetch('http://localhost:5000/api/products/'+product_id).
+    then(res => res.json()).then(data =>
+      dispatch({
+        type: ADD_TO_CART,
+        payload: data,
+        qty:qty
+      })
+    );
+    const cart = getState();
+    Cookie.set("cartItems", JSON.stringify(cart));
+  }
+  catch(e) {
+  }
+}
+
 export const deleteFromCart = (product_id) =>  (dispatch,getState) => {
     try{
         fetch('http://localhost:5000/api/products/'+product_id).
@@ -44,4 +46,11 @@ export const changeQtyInCart = (product_id, qty) => (dispatch,getState) => {
     }
     catch(e){
     }
-    }
+}
+
+export const saveShipping = (data) => (dispatch) => {
+  dispatch({ type: CART_SAVE_SHIPPING, payload: data });
+}
+export const savePayment = (data) => (dispatch) => {
+  dispatch({ type: CART_SAVE_PAYMENT, payload: data });
+}
