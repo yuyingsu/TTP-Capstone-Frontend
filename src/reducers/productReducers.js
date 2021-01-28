@@ -31,6 +31,21 @@ const productReducers = ( state = initialState, action ) => {
                 loading: false,
                 productList: action.payload
             };
+        case actionTypes.ADD_PRODUCT:
+            return {
+                ...state,
+                products: state.products.push(action.payload)
+            }
+        case actionTypes.EDIT_PRODUCT:
+            return {
+                ...state,
+                products: state.products.map(item => item._id == action.payload._id ? action.payload: item)
+            }
+        case actionTypes.DELETE_PRODUCT:
+            return {
+                    ...state,
+                    products: state.products.filter(item => item._id !== action.payload._id)
+            }   
         default:
         return state;
         }

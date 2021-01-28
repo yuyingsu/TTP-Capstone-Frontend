@@ -1,5 +1,6 @@
 import './App.css';
 import { Header } from './components'
+import Products from './screens/Products';
 import { Cart, Home, Payment, PlaceOrder, Product, Profile, Register, Shipping, Signin } from './screens/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/shipping" component={Shipping} />
           <Route exact path="/signin" component={Signin} />
+          <Route exact path="/products" component={Products} />
         </div>
       </BrowserRouter>
   );
