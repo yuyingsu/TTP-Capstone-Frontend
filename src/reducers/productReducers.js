@@ -34,7 +34,7 @@ const productReducers = ( state = initialState, action ) => {
         case actionTypes.ADD_PRODUCT:
             return {
                 ...state,
-                products: state.products.push(action.payload)
+                products: state.products.concat(action.payload)
             }
         case actionTypes.EDIT_PRODUCT:
             return {
