@@ -45,7 +45,7 @@ const productReducers = ( state = initialState, action ) => {
             return {
                     ...state,
                     products: state.products.filter(item => item._id !== action.payload._id)
-            }   
+            }
         default:
         return state;
         }

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { addToCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+
 function Cart(props) {
   const cart = useSelector(state => state.ct);
   const {carts} = cart;
@@ -21,19 +24,20 @@ function Cart(props) {
   const checkoutHandler = () => {
     console.log(props)
     props.history.push("/signin?redirect=shipping");
-    console.log(props)
+    //console.log(props)
   }
   console.log(carts);
   return(
-    <div>
-    <div>
+    <>
+    <div class="shopping-cart">
+      <div class="title">Shopping Bag</div>
       {res}
     </div>
     <div className="cart-action">
     <h3>
-      Subtotal ( {carts.reduce((a, c) => a + c.qty, 0)} items)
+      Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items)
       :
-       $ {carts.reduce((a, c) => a + c.price * c.qty, 0)}
+       ${cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
     </h3>
     <button onClick={checkoutHandler} className="button primary full-width" disabled={carts.length === 0}>
       Proceed to Checkout
@@ -43,5 +47,6 @@ function Cart(props) {
   );
 }
 
+const mapStateToProps = () => {};
 
-export default Cart;
+export default withRouter(connect(mapStateToProps)(Cart));

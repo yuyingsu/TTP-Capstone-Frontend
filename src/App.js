@@ -3,7 +3,7 @@ import { Header } from './components'
 import Products from './screens/Products';
 import Order from './screens/Order';
 import Orders from './screens/Orders';
-import { Cart, Home, Payment, PlaceOrder, Product, Profile, Register, Shipping, Signin } from './screens/';
+import { Cart, Home, Payment, PlaceOrder, Product, Profile, Register, SearchResults, Shipping, Signin } from './screens/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -19,6 +19,11 @@ function App() {
           <Route path="/product/:id" component={Product} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
+          <Route
+            path="/search/name/:name?"
+            component={SearchResults}
+            exact
+          ></Route>
           <Route exact path="/shipping" component={Shipping} />
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/products" component={Products} />
