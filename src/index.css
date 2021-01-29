@@ -37,8 +37,8 @@ ul {
   padding-top: 1rem;
 }
 .checkout-steps > div.active {
-  border-top: 0.3rem #f08000 solid;
-  color: #f08000;
+  border-top: 0.3rem #eb6864 solid;
+  color: #eb6864;
 }
 
 /* Rating */
