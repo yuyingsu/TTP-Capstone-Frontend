@@ -28,16 +28,16 @@ function Cart(props) {
   }
   console.log(carts);
   return(
-    <>
+    <div>
     <div class="shopping-cart">
       <div class="title">Shopping Bag</div>
       {res}
     </div>
     <div className="cart-action">
     <h3>
-      Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items)
+      Subtotal ({carts.reduce((a, c) => a + c.qty, 0)} items)
       :
-       ${cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+       ${carts.reduce((a, c) => a + c.price * c.qty, 0)}
     </h3>
     <button onClick={checkoutHandler} className="button primary full-width" disabled={carts.length === 0}>
       Proceed to Checkout

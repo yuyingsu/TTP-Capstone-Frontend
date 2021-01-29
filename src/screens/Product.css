@@ -1,12 +1,11 @@
-div.product
-{
+div.product {
   background-color: rgb(249, 252, 255);
   color: black;
 }
 
 img {
   float: left;
-  margin: 10px;
+  margin: 30px;
 }
 h1 {
   text-align: left;
@@ -22,12 +21,12 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 80%;
-  background-color: #8a8b9469;
+  border: none;
+  float: left;
 }
 
 td,
 th {
-  border: 1px solid #cdcdcd;
   text-align: left;
   padding: 8px;
 }
@@ -36,7 +35,6 @@ p {
   font-size: 16px;
 }
 .cartbttn {
-  float: right;
   padding-right: 20em;
   padding-top: 5em;
 }
@@ -50,9 +48,7 @@ p {
   font-size: 16px;
   border: 2px solid #4caf50;
   border-radius: 6px;
-  float: right;
 }
-
 .cartbttn button:hover {
   background-color: rgb(255, 217, 0);
 }
@@ -63,4 +59,7 @@ p {
   float: center;
   width: 40%;
   padding-right: 2em;
+}
+li {
+  margin-top: 20px;
 }

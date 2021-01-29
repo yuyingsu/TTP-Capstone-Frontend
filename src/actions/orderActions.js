@@ -33,6 +33,7 @@ export const listMyOrder = (order_id) =>  (dispatch,getState) => {
       type: LIST_MY_ORDER_REQUEST,
     })
     const { userSignin: { userInfo } } = getState();
+    console.log(userInfo.token);
     fetch('http://localhost:5000/api/orders/'+order_id, {
       headers: {
         'content-type': 'application/json',

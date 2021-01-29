@@ -53,72 +53,64 @@ function Product(props) {
       ) : error ? (
         <div>{error} </div>
       ) : (
-        <>
       <div className="product">
-        <div className="title">
-          <h1>
-            {product.name}
-            <span>1st Edition</span>
-          </h1>
-        </div>
-        <div className="subtitle">
-          <h2 style={{ textAlign: "left", paddingLeft: "0.5em" }}>
-            {"Developed by " /*this.state.details.developer*/}
-          </h2>
-        </div>
         <div className="photo-gallery">
-          <img src={product.image} style={{height: "500px", width: "500px"}} alt="game pic" />
+          <img src={product.image} style={{height: "450px", width: "450px"}} alt="game pic" />
         </div>
-        <div className="product-table">
-          <table>
+        <div class="container">
+          <div class="row">
+          <div class="col-sm">
+          <table style={{marginLeft:"100px", marginTop:"40px"}}>
             <tr>
-              <th>Developer</th>
-              <th>{/*this.state.details.developer*/}</th>
+            <td> 
+            <h1>
+            {product.name}
+            </h1>
+            </td>
             </tr>
+            <tr>
+            <th>Brand</th>
+            <td>{product.brand}</td>
+            </tr>
+            <tr>
             <th>Rating</th>
-            <th>{product.rating}</th>
-            <tr>
-              <th>Platform(s)</th>
-              <th>{/*this.state.details.platform*/}</th>
+            <td>{product.rating}</td>
             </tr>
             <tr>
-              <th>Release</th>
-              <th>{/*this.state.details.release*/}</th>
+            <th>Number of reviews:</th>
+            <td>{product.numReviews}</td>
             </tr>
             <tr>
-              <th>Price</th>
-              <th>{product.price}</th>
+              <th>Description</th>
+              <td>{product.description}</td>
             </tr>
           </table>
-        </div>
-        <div className="cartbttn">
-          <div>
-            <button type="button" onClick={handleAddToCart}>
-              Add to Cart
-            </button>
-            <select onChange={(e)=>{setQty(e.target.value)}}>
+          </div>
+          <div class="col-sm">
+          <span className="cartbttn">
+            <select onChange={(e)=>{setQty(e.target.value)}} style={{marginTop:"120px"}}>
             {[...Array(product.countInStock).keys()].map(x =>
-                        <option key={x + 1} value={x + 1}>{x + 1}</option>
+                        <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
                       )}
             </select>
+            <div>
+            <button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"55px"}}>
+              Add to Cart
+            </button>
+            </div>
+          </span>
           </div>
-        </div>
-        <div className="game-description">
-          <div>
-            <h1>Game Description</h1>
-            <p>{product.description}</p>
           </div>
-        </div>
-        <div className="product-reviews">
-        <a href="#reviews">
+          <div class="row">
+          <div class="col">
+          <div style={{marginTop:"250px", marginRight:"450px"}}>
+          <div className="product-reviews" >
                     <Rating
                       value={product.rating}
                       text={product.numReviews + ' reviews'}
                     />
-                  </a>
-        </div>
-      </div>
-      <div className="content-margined">
+          </div>
+          <div className="content-margined">
             <h2>Reviews</h2>
             {!product.reviews.length && <div>There is no review</div>}
             <ul className="review" id="reviews">
@@ -139,7 +131,7 @@ function Product(props) {
                   <form onSubmit={submitHandler}>
                     <ul className="form-container">
                       <li>
-                        <label htmlFor="rating">Rating</label>
+                        <label htmlFor="rating">Rating</label><br/>
                         <select
                           name="rating"
                           id="rating"
@@ -154,7 +146,7 @@ function Product(props) {
                         </select>
                       </li>
                       <li>
-                        <label htmlFor="comment">Comment</label>
+                        <label htmlFor="comment">Comment</label><br/>
                         <textarea
                           name="comment"
                           value={comment}
@@ -176,8 +168,11 @@ function Product(props) {
               </li>
             </ul>
           </div>
-          </>
-
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
       )}
     </div>
 
