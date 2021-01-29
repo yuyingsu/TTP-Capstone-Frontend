@@ -212,7 +212,7 @@ ul {
 .header__searchIcon {
   padding: 5px;
   height: 22px !important;
-  background-color: #cd9042;
+  background-color: #eb6864;
   cursor: pointer;
 }
 
@@ -286,4 +286,55 @@ textarea {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Product Page */
+.product-page div {
+  background-color: rgb(249, 252, 255);
+  color: black;
+}
+
+.photo-gallery img {
+  float: left;
+  margin: 30px;
+}
+
+.product-page h1 {
+  text-align: left;
+  margin: 10px;
+}
+
+.product-table {
+  padding-top: 3em;
+  float: left;
+}
+
+.product-page table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  border: none;
+  float: left;
+}
+
+.product-page td,
+th {
+  text-align: left;
+  padding: 8px;
+}
+
+.product-page p {
+  font-size: 16px;
+}
+
+.game-description h1 {
+  text-align: center;
+}
+.game-description div {
+  float: center;
+  width: 40%;
+  padding-right: 2em;
+}
+.product-page li {
+  margin-top: 20px;
 }

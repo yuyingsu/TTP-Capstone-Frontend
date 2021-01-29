@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Product.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { detailsProduct, saveProductReview } from '../actions/productActions';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_SAVE_RESET } from '../constants/productConstants';
+import { Button } from 'reactstrap';
 
 function Product(props) {
   const [qty, setQty] = useState(1);
@@ -47,7 +47,7 @@ function Product(props) {
 
   //console.log("product" + JSON.stringify(product))
     return (
-      <div>
+      <div className="product-page">
       {loading ? (
         <div>Loading...</div>
       ) : error ? (
@@ -62,7 +62,7 @@ function Product(props) {
           <div class="col-sm">
           <table style={{marginLeft:"100px", marginTop:"40px"}}>
             <tr>
-            <td> 
+            <td>
             <h1>
             {product.name}
             </h1>
@@ -89,21 +89,21 @@ function Product(props) {
           <div class="col-sm">
           <span className="cartbttn">
             <select onChange={(e)=>{setQty(e.target.value)}} style={{marginTop:"120px"}}>
-            {[...Array(product.countInStock).keys()].map(x =>
-                        <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
+            {[...Array(product.countInStock).keys()].slice(0,10).map(x =>
+                <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
                       )}
             </select>
             <div>
-            <button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"45px"}}>
+            <Button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"0px"}}>
               Add to Cart
-            </button>
+            </Button>
             </div>
           </span>
           </div>
           </div>
           <div class="row">
           <div class="col">
-          <div style={{marginTop:"300px", marginRight:"450px"}}>
+          <div style={{marginTop:"0px", marginRight:"450px"}}>
           <div className="product-reviews" style={{marginLeft:"50px"}}>
                     <Rating
                       value={product.rating}
@@ -154,9 +154,9 @@ function Product(props) {
                         ></textarea>
                       </li>
                       <li>
-                        <button type="submit" className="button primary">
+                        <Button type="submit" className="button primary">
                           Submit
-                        </button>
+                        </Button>
                       </li>
                     </ul>
                   </form>
