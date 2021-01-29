@@ -2,6 +2,7 @@ import React from 'react';
 import { deleteFromCart, changeQtyInCart } from '../actions/cartActions';
 import { useDispatch } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function CardProduct(props) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function CardProduct(props) {
     </div>
 
     <div class="description">
-        <h5>{props.cart.name}</h5>
+        <h5><Link to={`/product/${props.cart._id}`}>{props.cart.name}</Link></h5>
     </div>
 
     <div class="quantity">
