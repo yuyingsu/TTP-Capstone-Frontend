@@ -26,30 +26,39 @@ function Signin(props) {
     dispatch(signin(email, password));
   }
 
-  return <Container>
-    <Form onSubmit={submitHandler}>
-    <h2>Sign-in</h2>
-    <br></br>
-    {loading && <div>Loading...</div>}
-    {error && <div>{error}</div>}
-  <FormGroup>
-    <Label for="email">Email</Label>
-    <Input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} />
-  </FormGroup>
-  <FormGroup>
-    <Label for="password">Password</Label>
-    <Input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} />
-  </FormGroup>
-  <Button type="submit" className="button primary">Sign In</Button>
-  <Container>
-  <Row>
+  return <div className="form">
+    <form onSubmit={submitHandler} >
+      <ul className="form-container">
+        <li>
+          <h2>Sign-In</h2>
+        </li>
+        <li>
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
+        </li>
+        <li>
+          <label htmlFor="email">
+            Email
+          </label>
+          <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>
+          </input>
+        </li>
+        <li>
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}>
+          </input>
+        </li>
+        <li>
+          <Button type="submit" className="button primary">Sign In</Button>
+        </li>
+        <li>
           New to Gamer.com?
-        </Row>
-        <Row>
+        </li>
+        <li>
           <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary text-center" >Create your Gamer.com account</Link>
-        </Row>
-        </Container>
-    </Form>
-    </Container>
+        </li>
+      </ul>
+    </form>
+  </div>
 }
 export default Signin;

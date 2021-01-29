@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { savePayment } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { Button } from 'reactstrap';
 
 function PaymentScreen(props) {
   const [paymentMethod, setPaymentMethod] = useState('');
@@ -38,9 +39,9 @@ function PaymentScreen(props) {
             </li>
 
             <li>
-              <button type="submit" className="button primary">
+              <Button type="submit" className="button primary">
                 Continue
-              </button>
+              </Button>
             </li>
           </ul>
         </form>

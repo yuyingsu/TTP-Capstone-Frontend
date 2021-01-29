@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
+import { Button } from 'reactstrap';
 
 function PlaceOrder(props) {
 
@@ -30,8 +31,8 @@ function PlaceOrder(props) {
     }));
     props.history.push("/order/" + order._id);
   }
-  console.log(loading);
-  console.log(success);
+  //console.log(loading);
+  //console.log(success);
   useEffect(() => {
     if (success) {
       props.history.push("/order/" + order._id);
@@ -48,7 +49,7 @@ function PlaceOrder(props) {
             Shipping
           </h3>
           <div>
-            {cart.shipping.address}<br></br>{cart.shipping.city + ", " + cart.shipping.state + cart.shipping.zip},
+            {cart.shipping.address}<br></br>{cart.shipping.city + ", " + cart.shipping.state + " " + cart.shipping.zip},
           </div>
         </div>
         <div>
@@ -103,7 +104,7 @@ function PlaceOrder(props) {
       <div className="placeorder-action">
         <ul>
           <li>
-            <button className="button primary full-width" onClick={placeOrderHandler} >Place Order</button>
+            <Button className="button primary full-width" onClick={placeOrderHandler} >Place Order</Button>
           </li>
           <li>
             <h3>Order Summary</h3>
