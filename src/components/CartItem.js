@@ -22,7 +22,7 @@ function CardProduct(props) {
     </div>
 
     <div class="description">
-        <h5><Link to={`/product/${props.cart._id}`}>{props.cart.name}</Link></h5>
+        <h5><Link to={`/product/${props.cart._id}`}><span>{props.cart.name}</span></Link></h5>
     </div>
 
     <div class="quantity">

@@ -99,7 +99,7 @@ ul {
 
 /* Product Image */
 .image {
-  margin-right: 50px;
+  margin-right: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,19 +117,11 @@ ul {
 
 .description span {
   display: block;
-  font-size: 14px;
+  font-size: 25px;
   color: #43484D;
-  font-weight: 400;
+  font-weight: 500;
 }
 
-.description span:first-child {
-  margin-bottom: 5px;
-}
-.description span:last-child {
-  font-weight: 300;
-  margin-top: 8px;
-  color: #86939E;
-}
 
 /* Product Quantity */
 .quantity {
