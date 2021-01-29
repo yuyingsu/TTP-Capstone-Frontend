@@ -8,8 +8,7 @@ function PlaceOrder(props) {
 
   const cart = useSelector(state => state.ct);
   const orderCreate = useSelector(state => state.createOrder);
-  const { loading, success, error, order } = orderCreate;
-
+  const { success, order, loading } = orderCreate;
   const { carts, shipping, payment } = cart;
   if (!shipping.address) {
     props.history.push("/shipping");
@@ -29,14 +28,14 @@ function PlaceOrder(props) {
       orderItems: carts, shipping, payment, itemsPrice, shippingPrice,
       taxPrice, totalPrice
     }));
+    props.history.push("/order/" + order._id);
   }
+  console.log(loading);
+  console.log(success);
   useEffect(() => {
     if (success) {
-      console.log(carts, shipping, payment, itemsPrice, shippingPrice,
-        taxPrice, totalPrice)
-      //props.history.push("/order/" + order._id);
+      props.history.push("/order/" + order._id);
     }
-    if (loading) {console.log("still loading")}
 
   }, [success]);
 
