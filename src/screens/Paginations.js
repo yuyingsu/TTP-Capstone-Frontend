@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Pagination, PaginationItem } from 'reactstrap';
+import { Button, Pagination, PaginationItem } from 'reactstrap';
 class Paginations extends Component {
 
     goToFirst = () =>{
@@ -32,24 +32,24 @@ class Paginations extends Component {
     }
     const pages = array.map((num)=>(
         <PaginationItem>
-        <button onClick={()=>{this.goToPage(num)}}>{num}</button>
+        <Button onClick={()=>{this.goToPage(num)}}>{num}</Button>
         </PaginationItem>
     ));
     return (
         <div>
             <Pagination aria-label="Page navigation example">
             <PaginationItem>
-            <button onClick={this.goToFirst}>First</button>
+            <Button onClick={this.goToFirst}>{"<<"}</Button>
             </PaginationItem>
             <PaginationItem>
-            <button onClick={this.goBack}>Previous</button>
+            <Button onClick={this.goBack}>{"<"}</Button>
             </PaginationItem>
             {pages}
             <PaginationItem>
-            <button onClick={this.moveForward}>Next</button>
+            <Button onClick={this.moveForward}>{">"}</Button>
             </PaginationItem>
             <PaginationItem>
-            <button onClick={this.goToLast}>Last</button>
+            <Button onClick={this.goToLast}>{">>"}</Button>
             </PaginationItem>
             </Pagination>
         </div>

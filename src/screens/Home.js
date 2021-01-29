@@ -7,11 +7,10 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap';
-import CardProduct from '../components/CardProduct';
+import { CardProduct, Spinners} from '../components/';
+import Paginations from './Paginations'
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import SearchBox from '../components/SearchBox';
-import Paginations from './Paginations';
 import { Container, Row, Col } from 'reactstrap';
 import { listAllProducts,listProducts } from '../actions/productActions';
 function Home(props){
@@ -36,9 +35,10 @@ function Home(props){
 
       let res = null;
       if(!loading && productList){
+        //console.log(productList)
       res = productList.map((product) => (
 
-        <Col>
+        <Col className="d-flex justify-content-center align-items-center">
         <CardProduct price={product.price} countInStock={product.countInStock}
         rating={product.rating} numReviews={product.numReviews} id={product._id}
         name={product.name} image={product.image} brand={product.brand}
@@ -51,12 +51,12 @@ function Home(props){
       }
       return(
           <><Container>
-            <Row>
+            <Row >
               {res}
             </Row>
 
             {products.length > 3 &&
-            <Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/>}
+            <Row className="d-flex justify-content-center align-items-center my-4"><Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/></Row>}
             </Container>
         </>
       )

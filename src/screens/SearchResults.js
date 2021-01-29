@@ -36,9 +36,9 @@ function SearchResults(props){
 
       let res = null;
       if(!loading && productList){
+        console.log(productList)
       res = productList.map((product) => (
-
-        <Col>
+        <Col className="d-flex justify-content-center align-items-center">
         <CardProduct price={product.price} countInStock={product.countInStock}
         rating={product.rating} numReviews={product.numReviews} id={product._id}
         name={product.name} image={product.image} brand={product.brand}
@@ -56,7 +56,9 @@ function SearchResults(props){
             </Row>
 
             {products.length > 3 &&
-            <Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/>}
+            <Row className="d-flex justify-content-center align-items-center my-4">
+            <Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/>
+            </Row>}
             </Container>
         </>
       )

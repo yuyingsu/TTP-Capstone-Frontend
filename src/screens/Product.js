@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Product.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { detailsProduct, saveProductReview } from '../actions/productActions';
-import Rating from '../components/Rating';
+import { Button } from 'reactstrap';
+import { Spinners, Rating } from '../components/';
 import { PRODUCT_REVIEW_SAVE_RESET } from '../constants/productConstants';
 
 function Product(props) {
@@ -93,11 +93,11 @@ function Product(props) {
         </div>
         <div className="cartbttn">
           <div>
-            <button type="button" onClick={handleAddToCart}>
+            <Button type="button" onClick={handleAddToCart}>
               Add to Cart
-            </button>
+            </Button>
             <select onChange={(e)=>{setQty(e.target.value)}}>
-            {[...Array(product.countInStock).keys()].map(x =>
+            {[...Array(product.countInStock).keys()].slice(0,10).map(x =>
                         <option key={x + 1} value={x + 1}>{x + 1}</option>
                       )}
             </select>
@@ -162,9 +162,9 @@ function Product(props) {
                         ></textarea>
                       </li>
                       <li>
-                        <button type="submit" className="button primary">
+                        <Button type="submit" className="button primary">
                           Submit
-                        </button>
+                        </Button>
                       </li>
                     </ul>
                   </form>
