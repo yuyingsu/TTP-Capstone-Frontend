@@ -6,7 +6,8 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 function Cart(props) {
-  const cartItems = useSelector(state => state.ct.carts);
+  const cart = useSelector(state => state.ct);
+  const {carts} = cart;
   const productId = props.match.params.id;
   const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function Cart(props) {
       dispatch(addToCart(productId, qty));
     }
   }, []);
-  let res = cartItems.map((cart)=>(
+  let res = carts.map((cart)=>(
     <CartItem cart={cart}/>
   ));
 
@@ -25,7 +26,7 @@ function Cart(props) {
     props.history.push("/signin?redirect=shipping");
     //console.log(props)
   }
-
+  console.log(carts);
   return(
     <>
     <div class="shopping-cart">
@@ -38,11 +39,11 @@ function Cart(props) {
        ${cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
     </h5>
     <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>
+
       Proceed to Checkout
     </button>
-
   </div>
-  </>
+  </div>
   );
 }
 

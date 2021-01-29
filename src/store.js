@@ -3,7 +3,9 @@ import thunk from "redux-thunk";
 import cartReducers from './reducers/cartReducers'
 import Cookie from 'js-cookie'
 import {
-  createOrderReducer
+  createOrderReducer,
+  listAllOrderReducer,
+  listMyOrderReducer
 } from './reducers/orderReducers'
 import {
   productReducers,
@@ -16,18 +18,20 @@ import {
   userRegisterReducer,
   userUpdateReducer,
 } from './reducers/userReducers';
+import { loadState, saveState } from './components/localStorage';
 
-const cartItems = Cookie.getJSON('cartItems') || [];
+const cartItems = loadState()||[];
 const userInfo = Cookie.getJSON('userInfo') || null;
-
+console.log(cartItems);
 const initialState = {
-  cart: { cartItems, shipping: {}, payment: {} },
-  userSignin: { userInfo },
+  ct : {carts: cartItems, shipping:{}, payment:{}},
+  userSignin: { userInfo }
 };
-
 const rootReducer = combineReducers({
   ct: cartReducers,
   createOrder: createOrderReducer,
+  listAllOrder: listAllOrderReducer,
+  listMyOrder: listMyOrderReducer,
   pds: productReducers,
   productDetails: productDetailsReducer,
   productReviewSave: productReviewSaveReducer,
@@ -44,4 +48,7 @@ const store = createStore(
   initialState,
   storeEnhancers(applyMiddleware(thunk))
 );
+store.subscribe(() => {
+  saveState(store.getState().ct.carts);
+});
 export default store;
