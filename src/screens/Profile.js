@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { logout, update } from '../actions/userActions';
 //import { listMyOrders } from '../actions/orderActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button, Container, Row } from 'reactstrap';
 
 function Profile(props) {
   const [name, setName] = useState('');
@@ -72,10 +73,10 @@ function Profile(props) {
             </li>
 
             <li>
-              <button type="submit" className="button primary">Update</button>
+              <Button type="submit" className="button primary">Update</Button>
             </li>
             <li>
-              <button type="button" onClick={handleLogout} className="button secondary full-width">Logout</button>
+              <Button type="button" onClick={handleLogout} className="button secondary full-width">Logout</Button>
             </li>
 
           </ul>

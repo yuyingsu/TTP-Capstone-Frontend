@@ -251,3 +251,39 @@ ul {
   color: white;
   background-color: #131921;
 }
+
+/* Form */
+.form {
+  display: flex;
+  max-width: 60rem;
+  margin: 0 auto;
+  justify-content: center;
+}
+.form > div {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.form label {
+  margin: 1rem 0;
+    order: 1;
+    width: 10em;
+    padding-right: 0.5em;
+}
+
+.form input, textarea, select {
+  order: 2;
+  flex: 1 1 auto;
+}
+
+.form input,
+select,
+textarea {
+
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1.2rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

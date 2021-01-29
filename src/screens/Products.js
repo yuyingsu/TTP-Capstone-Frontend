@@ -16,13 +16,13 @@ function Products(props) {
     <tr key={product._id}>
       <td>{product._id}</td>
       <td>{product.name}</td>
-      <td>{product.price}</td>
+      <td>{"$" + product.price}</td>
       <td>{product.countInStock}</td>
       <td>{product.image}</td>
       <td>{product.brand}</td>
       <td>{product.description}</td>
       <td>
-      <div style={{width:"110px"}}>
+      <div style={{width:"160px"}}>
           <ModalForm buttonLabel={"Edit"} product={product}/>
           {' '}
           <Button color="danger" onClick={() => deleteAProduct(product)}>Del</Button>
