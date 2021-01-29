@@ -1,0 +1,39 @@
+.container {
+  background-color: rgb(219, 228, 228);
+  color: black;
+  font-weight: bold;
+}
+
+#email-label {
+  padding-right: 2.8em;
+}
+#email {
+  padding-right: 1em;
+  width: 17em;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+#password-label {
+  padding-right: 1em;
+}
+#password {
+  padding-right: 1em;
+  padding: 4px;
+  width: 17em;
+  margin-bottom: 20px;
+}
+
+.primary {
+  background-color: #008cba;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,44 @@
+.form-container {
+  background-color: rgb(219, 228, 228);
+  color: black;
+  font-weight: bold;
+}
+
+#name-label {
+  padding-right: 2.8em;
+}
+#name {
+  padding-right: 1em;
+  width: 17em;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+#email-label {
+  padding-right: 2.8em;
+}
+#email {
+  padding-right: 1em;
+  width: 17em;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+#password-label {
+  padding-right: 1em;
+}
+#password {
+  padding-right: 1em;
+  padding: 4px;
+  width: 17em;
+  margin-bottom: 20px;
+}
+
+#rePassword-label {
+  padding-right: 1em;
+}
+#rePassword {
+  padding-right: 1em;
+  padding: 4px;
+  width: 17em;
+  margin-bottom: 20px;
+}
