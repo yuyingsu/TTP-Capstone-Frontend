@@ -99,7 +99,7 @@ ul {
 
 /* Product Image */
 .image {
-  margin-right: 50px;
+  margin-right: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,19 +117,11 @@ ul {
 
 .description span {
   display: block;
-  font-size: 14px;
+  font-size: 25px;
   color: #43484D;
-  font-weight: 400;
+  font-weight: 500;
 }
 
-.description span:first-child {
-  margin-bottom: 5px;
-}
-.description span:last-child {
-  font-weight: 300;
-  margin-top: 8px;
-  color: #86939E;
-}
 
 /* Product Quantity */
 .quantity {
@@ -146,25 +138,6 @@ ul {
   font-size: 16px;
   color: #43484D;
   font-weight: 300;
-}
-
-button[class*=btn] {
-  width: 15px;
-  height: 15px;
-  background-color: #E1E8EE;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-.minus-btn img {
-  margin-bottom: 3px;
-}
-.plus-btn img {
-  margin-top: 2px;
-}
-button:focus,
-input:focus {
-  outline:0;
 }
 
 /* Total Price */
@@ -202,4 +175,115 @@ input:focus {
   .buttons {
     margin-right: 20px;
   }
+}
+
+/* Header */
+
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #131921;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__logo {
+  width: 100px;
+  object-fit: contain;
+  margin: 0 20px;
+}
+
+.header__search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  border-radius: 24px;
+}
+
+.header__searchInput {
+  height: 12px;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+.header__searchIcon {
+  padding: 5px;
+  height: 22px !important;
+  background-color: #cd9042;
+  cursor: pointer;
+}
+
+.header__optionLineOne {
+  font-size: 10px;
+}
+
+.header__optionLineTwo {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.header__optionBasket {
+  display: flex;
+  align-items: center;
+  color: white;
+  background-color: #131921;
+}
+
+.header__basketCount {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #131921;
+}
+
+.header__option {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: white;
+  background-color: #131921;
+}
+
+/* Form */
+.form {
+  display: flex;
+  max-width: 60rem;
+  margin: 0 auto;
+  justify-content: center;
+}
+.form > div {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.form label {
+  margin: 1rem 0;
+    order: 1;
+    width: 10em;
+    padding-right: 0.5em;
+}
+
+.form input, textarea, select {
+  order: 2;
+  flex: 1 1 auto;
+}
+
+.form input,
+select,
+textarea {
+
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1.2rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

@@ -94,7 +94,7 @@ function Product(props) {
                       )}
             </select>
             <div>
-            <button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"55px"}}>
+            <button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"45px"}}>
               Add to Cart
             </button>
             </div>
@@ -103,8 +103,8 @@ function Product(props) {
           </div>
           <div class="row">
           <div class="col">
-          <div style={{marginTop:"250px", marginRight:"450px"}}>
-          <div className="product-reviews" >
+          <div style={{marginTop:"300px", marginRight:"450px"}}>
+          <div className="product-reviews" style={{marginLeft:"50px"}}>
                     <Rating
                       value={product.rating}
                       text={product.numReviews + ' reviews'}
@@ -180,4 +180,3 @@ function Product(props) {
 }
 
 export default Product;
-

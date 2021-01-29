@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveShipping } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { Button } from 'reactstrap';
 
 function Shipping(props) {
 
@@ -65,7 +66,7 @@ function Shipping(props) {
           </li>
 
           <li>
-            <button type="submit" className="button primary">Continue</button>
+            <Button type="submit" className="button primary">Continue</Button>
           </li>
 
         </ul>

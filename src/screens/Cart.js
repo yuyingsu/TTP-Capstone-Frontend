@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { Button } from 'reactstrap';
 
 function Cart(props) {
   const cart = useSelector(state => state.ct);
@@ -34,14 +35,13 @@ function Cart(props) {
       {res}
     </div>
     <div className="cart-action">
-    <h3>
-      Subtotal ({carts.reduce((a, c) => a + c.qty, 0)} items)
-      :
+    <h5>
+      Subtotal ({carts.reduce((a, c) => a + c.qty, 0)} items):
        ${carts.reduce((a, c) => a + c.price * c.qty, 0)}
-    </h3>
-    <button onClick={checkoutHandler} className="button primary full-width" disabled={carts.length === 0}>
+    </h5>
+    <Button onClick={checkoutHandler} className="button primary full-width" disabled={carts.length === 0}>
       Proceed to Checkout
-    </button>
+    </Button>
   </div>
   </div>
   );
