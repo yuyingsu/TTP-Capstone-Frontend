@@ -25,7 +25,7 @@ function SearchBox(props) {
           id="q"
           onChange={(e) => setName(e.target.value)}
         />
-        <SearchIcon className="header__searchIcon" />
+         <SearchIcon onClick={submitHandler}className="header__searchIcon" />
       </div>
     </form>
   );
