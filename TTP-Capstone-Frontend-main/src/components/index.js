@@ -1,0 +1,6 @@
+export { default as CardProduct } from './CardProduct'
+export { default as CheckoutSteps } from './CheckoutSteps'
+export { default as Header } from './Header'
+export { default as Rating } from './Rating'
+export { default as SearchBox } from './SearchBox'
+export { default as Spinners } from './Spinners'
