@@ -6,7 +6,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import { Button } from 'reactstrap';
 
 function Shipping(props) {
-  const [fullName, setFullName] = useState('');
+
   const [address, setAddress] = useState('');
   const [address2, setAddress2] = useState('');
   const [state, setState] = useState('');
@@ -17,7 +17,7 @@ function Shipping(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShipping({ fullName, address, address2, city, state, zip }));
+    dispatch(saveShipping({ address, address2, city, state, zip }));
     props.history.push('payment');
   }
   return <div>
@@ -28,13 +28,7 @@ function Shipping(props) {
           <li>
             <h2>Shipping</h2>
           </li>
-          <li>
-            <label htmlFor="fullName">
-              Name
-          </label>
-            <input type="text" name="fullName" id="fullName" onChange={(e) => setFullName(e.target.value)}>
-            </input>
-          </li>
+
           <li>
             <label htmlFor="address">
               Address Line 1

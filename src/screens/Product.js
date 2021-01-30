@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Product.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { detailsProduct, saveProductReview } from '../actions/productActions';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_SAVE_RESET } from '../constants/productConstants';
-import { Button } from 'reactstrap';
-import { Spinners } from '../components'
 
 function Product(props) {
   const [qty, setQty] = useState(1);
@@ -43,14 +42,15 @@ function Product(props) {
     );
   };
   const handleAddToCart = () => {
+    console.log("xxx");
     props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
   };
 
   //console.log("product" + JSON.stringify(product))
     return (
-      <div className="product-page">
+      <div>
       {loading ? (
-        <Spinners status="loading" />
+        <div>Loading...</div>
       ) : error ? (
         <div>{error} </div>
       ) : (
@@ -62,17 +62,23 @@ function Product(props) {
           <div class="row">
           <div class="col-sm">
           <table style={{marginLeft:"100px", marginTop:"40px"}}>
-            <caption><h5>{product.name}</h5></caption>
+            <tr>
+            <td> 
+            <h1>
+            {product.name}
+            </h1>
+            </td>
+            </tr>
             <tr>
             <th>Brand</th>
             <td>{product.brand}</td>
             </tr>
             <tr>
             <th>Rating</th>
-            <td><Rating value={product.rating} /></td>
+            <td>{product.rating}</td>
             </tr>
             <tr>
-            <th>Reviews</th>
+            <th>Number of reviews:</th>
             <td>{product.numReviews}</td>
             </tr>
             <tr>
@@ -84,24 +90,29 @@ function Product(props) {
           <div class="col-sm">
           <span className="cartbttn">
             <select onChange={(e)=>{setQty(e.target.value)}} style={{marginTop:"120px"}}>
-            {[...Array(product.countInStock).keys()].slice(0,10).map(x =>
-                <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
+            {[...Array(product.countInStock).keys()].map(x =>
+                        <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
                       )}
             </select>
             <div>
-            <Button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"0px"}}>
+            <button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"45px"}}>
               Add to Cart
-            </Button>
+            </button>
             </div>
           </span>
           </div>
           </div>
           <div class="row">
           <div class="col">
-          <div style={{marginTop:"0px", marginRight:"450px"}}>
-
+          <div style={{marginTop:"300px", marginRight:"450px"}}>
+          <div className="product-reviews" style={{marginLeft:"50px"}}>
+                    <Rating
+                      value={product.rating}
+                      text={product.numReviews + ' reviews'}
+                    />
+          </div>
           <div className="content-margined">
-            <h5 style={{marginTop:"200px"}}>Reviews</h5>
+            <h2>Reviews</h2>
             {!product.reviews.length && <div>There is no review</div>}
             <ul className="review" id="reviews">
               {product.reviews.map((review) => (
@@ -116,7 +127,7 @@ function Product(props) {
                 </li>
               ))}
               <li>
-                <h5>Write a customer review</h5>
+                <h3>Write a customer review</h3>
                 {userInfo ? (
                   <form onSubmit={submitHandler}>
                     <ul className="form-container">
@@ -144,9 +155,9 @@ function Product(props) {
                         ></textarea>
                       </li>
                       <li>
-                        <Button type="submit" className="button primary">
+                        <button type="submit" className="button primary">
                           Submit
-                        </Button>
+                        </button>
                       </li>
                     </ul>
                   </form>

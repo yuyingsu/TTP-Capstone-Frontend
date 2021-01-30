@@ -60,7 +60,7 @@ export default function Rating(props) {
           }
         ></i>
       </span>
-      <span className="text-muted">{props.text ? props.text : ''}</span>
+      <span style={{color:"white"}}>{props.text ? props.text : ''}</span>
     </div>
   );
 }

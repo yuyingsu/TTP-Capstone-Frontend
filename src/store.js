@@ -5,9 +5,7 @@ import Cookie from 'js-cookie'
 import {
   createOrderReducer,
   listAllOrderReducer,
-  listMyOrderReducer,
-  myOrderListReducer,
-  orderPayReducer
+  listMyOrderReducer
 } from './reducers/orderReducers'
 import {
   productReducers,
@@ -24,7 +22,7 @@ import { loadState, saveState } from './components/localStorage';
 
 const cartItems = loadState()||[];
 const userInfo = Cookie.getJSON('userInfo') || null;
-//console.log(cartItems);
+console.log(cartItems);
 const initialState = {
   ct : {carts: cartItems, shipping:{}, payment:{}},
   userSignin: { userInfo }
@@ -34,8 +32,6 @@ const rootReducer = combineReducers({
   createOrder: createOrderReducer,
   listAllOrder: listAllOrderReducer,
   listMyOrder: listMyOrderReducer,
-  myOrderList: myOrderListReducer,
-  orderPay: orderPayReducer,
   pds: productReducers,
   productDetails: productDetailsReducer,
   productReviewSave: productReviewSaveReducer,

@@ -2,7 +2,9 @@ import * as actionTypes from '../constants/productConstants';
 const initialState = {
     products:[],
     productList:[],
-    loading:true
+    loading:true,
+    loadingAll:true,
+    total: 0
 };
 
 const productReducers = ( state = initialState, action ) => {
@@ -10,7 +12,7 @@ const productReducers = ( state = initialState, action ) => {
         case actionTypes.FETCH_PRODUCT_REQUEST:
         return {
             ...state,
-            loading:true,
+            loadingAll:true,
             product:[]
         }
         case actionTypes.FETCH_PRODUCT_PAGE_REQUEST:
@@ -22,14 +24,19 @@ const productReducers = ( state = initialState, action ) => {
         case actionTypes.FETCH_PRODUCT_SUCCESS:
         return {
                 ...state,
-                loading: false,
+                loadingAll: false,
                 products: action.payload
             };
           case actionTypes.FETCH_PRODUCT_PAGE_SUCCESS:
-            return {
+          let len = 0;
+          if(action.total){
+            len = action.total.length;
+          }  
+          return {
                 ...state,
                 loading: false,
-                productList: action.payload
+                productList: action.payload,
+                total: len
             };
         case actionTypes.ADD_PRODUCT:
             return {
