@@ -7,8 +7,9 @@ import { deliverOrder, listMyOrder, payOrder } from '../actions/orderActions';
 import {
   ORDER_PAY_RESET,
 } from '../constants/orderConstants';
+import { Button } from 'reactstrap';
 
-export default function OrderScreen(props) {
+export default function Order(props) {
   const orderId = props.match.params.id;
   console.log(orderId)
   const [sdkReady, setSdkReady] = useState(false);
@@ -64,19 +65,20 @@ export default function OrderScreen(props) {
     dispatch(deliverOrder(myOrder));
   };
   return (success ? <div>
-      <h1>myOrder {myOrder._id}</h1>
-      <div className="row top">
+      <br />
+      <h1>Order {myOrder._id}</h1>
+      <div className="row top" style={{margin: "0px"}}>
         <div className="col-8">
           <ul>
             <li>
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {myOrder.shipping.fullName} <br />
-                  <strong>Address: </strong> {myOrder.shipping.address}, {myOrder.shipping.address2},
+                  {myOrder.shipping.fullName} <br />
+                  {myOrder.shipping.address}<br />
+                  {myOrder.shipping.address2 && myOrder.shipping.address2}{myOrder.shipping.address2 && <br />}
                   {myOrder.shipping.city},{' '}
-                  {myOrder.shipping.state},
-                  {myOrder.shipping.zip}
+                  {myOrder.shipping.state + " " + myOrder.shipping.zip}
                 </p>
                 {myOrder.isDelivered ? (
                   <h5>
@@ -101,8 +103,6 @@ export default function OrderScreen(props) {
               </div>
             </li>
             <li>
-              <div className="card card-body">
-                <h2>myOrder Items</h2>
                 <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
@@ -128,7 +128,6 @@ export default function OrderScreen(props) {
                 )}
                 </ul>
               </div>
-              </div>
             </li>
           </ul>
         </div>
@@ -136,7 +135,7 @@ export default function OrderScreen(props) {
           <div className="card card-body">
             <ul>
               <li>
-                <h2>myOrder Summary</h2>
+                <h2>Order Summary</h2>
               </li>
               <li>
                 <div className="row">
@@ -159,13 +158,14 @@ export default function OrderScreen(props) {
               <li>
                 <div className="row">
                   <div>
-                    <strong> myOrder Total</strong>
+                    <strong>Total</strong>
                   </div>
                   <div>
                     <strong>${myOrder.totalPrice.toFixed(2)}</strong>
                   </div>
                 </div>
               </li>
+              <br />
               {!myOrder.isPaid && (
                 <li>
                   {!sdkReady ? (
@@ -178,7 +178,7 @@ export default function OrderScreen(props) {
                       {loadingPay && "Loading..."}
 
                       <PayPalButton
-                        amount={myOrder.totalPrice}
+                        amount={myOrder.totalPrice.toFixed(2)}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton>
                     </p>
@@ -187,13 +187,13 @@ export default function OrderScreen(props) {
               )}
               {userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
                 <li>
-                  <button
+                  <Button
                     type="button"
                     className="primary block"
                     onClick={deliverHandler}
                   >
-                    Deliver myOrder
-                  </button>
+                    Deliver Order
+                  </Button>
                 </li>
               )}
             </ul>

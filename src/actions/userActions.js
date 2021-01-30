@@ -18,7 +18,7 @@ const update = ({ userId, name, email, password }) => async (dispatch, getState)
       }
     });
     dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
-    Cookie.set('userInfo', JSON.stringify(data));
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_UPDATE_FAIL, payload: error.message });
   }
@@ -30,7 +30,7 @@ const signin = (email, password) => async (dispatch) => {
   try {
     const { data } = await Axios.post("http://localhost:5000/api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    Cookie.set('userInfo', JSON.stringify(data));
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error.message });
   }
@@ -41,7 +41,7 @@ const register = (name, email, password) => async (dispatch) => {
   try {
     const { data } = await Axios.post("http://localhost:5000/api/users/register", { name, email, password });
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-    Cookie.set('userInfo', JSON.stringify(data));
+    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({ type: USER_REGISTER_FAIL, payload: error.message });
   }

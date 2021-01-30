@@ -34,7 +34,7 @@ function MyOrders(props) {
             <td>{order._id}</td>
             <td>{order.createdAt}</td>
             <td>{"$" + order.totalPrice.toFixed(2)}</td>
-            <td>{order.isPaid}</td>
+            <td>{order.isPaid && "PAID"}</td>
             <td>
               <Link to={"/order/" + order._id}>DETAILS</Link>
             </td>

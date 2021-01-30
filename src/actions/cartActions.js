@@ -21,7 +21,7 @@ export const deleteFromCart = (product_id) =>  (dispatch,getState) => {
             type: DELETE_FROM_CART,
             payload: product_id
           })
-    Cookie.set("cartItems", getState().ct.carts);
+    localStorage.setItem("cartItems", getState().ct.carts);
   }
 export const changeQtyInCart = (product_id, qty) => (dispatch,getState) => {
     dispatch({
@@ -30,7 +30,7 @@ export const changeQtyInCart = (product_id, qty) => (dispatch,getState) => {
             qty
           })
     console.log(JSON.stringify(getState().ct.carts));
-    Cookie.set("cartItems", getState().ct.carts);
+    localStorage.setItem("cartItems", getState().ct.carts);
     console.log(Cookie.get("cartItems"));
 }
 
