@@ -98,10 +98,9 @@ function Product(props) {
           </div>
           <div class="row">
           <div class="col">
-          <div style={{marginTop:"0px", marginRight:"450px"}}>
-
+          <div style={{marginRight:"450px"}}>
           <div className="content-margined">
-            <h5 style={{marginTop:"200px"}}>Reviews</h5>
+            <h5 style={{marginTop:"300px"}}>Reviews</h5>
             {!product.reviews.length && <div>There is no review</div>}
             <ul className="review" id="reviews">
               {product.reviews.map((review) => (

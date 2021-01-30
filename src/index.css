@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -109,8 +109,8 @@ ul {
   width: 80%;
   height: 125%;
   margin: 40px auto;
-  background: #FFFFFF;
-  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+  background: #ffffff;
+  box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
 
   display: flex;
@@ -119,9 +119,9 @@ ul {
 
 .title {
   height: 60px;
-  border-bottom: 1px solid #E1E8EE;
+  border-bottom: 1px solid #e1e8ee;
   padding: 20px 30px;
-  color: #5E6977;
+  color: #5e6977;
   font-size: 18px;
   font-weight: 400;
 }
@@ -133,8 +133,8 @@ ul {
 }
 
 .item:nth-child(3) {
-  border-top:  1px solid #E1E8EE;
-  border-bottom:  1px solid #E1E8EE;
+  border-top: 1px solid #e1e8ee;
+  border-bottom: 1px solid #e1e8ee;
 }
 
 /* Product Image */
@@ -158,10 +158,9 @@ ul {
 .description span {
   display: block;
   font-size: 25px;
-  color: #43484D;
+  color: #43484d;
   font-weight: 500;
 }
-
 
 /* Product Quantity */
 .quantity {
@@ -176,7 +175,7 @@ ul {
   text-align: center;
   width: 32px;
   font-size: 16px;
-  color: #43484D;
+  color: #43484d;
   font-weight: 300;
 }
 
@@ -186,7 +185,7 @@ ul {
   padding-top: 27px;
   text-align: center;
   font-size: 16px;
-  color: #43484D;
+  color: #43484d;
   font-weight: 300;
 }
 
@@ -306,12 +305,14 @@ ul {
 }
 .form label {
   margin: 1rem 0;
-    order: 1;
-    width: 10em;
-    padding-right: 0.5em;
+  order: 1;
+  width: 10em;
+  padding-right: 0.5em;
 }
 
-.form input, textarea, select {
+.form input,
+textarea,
+select {
   order: 2;
   flex: 1 1 auto;
 }
@@ -319,7 +320,6 @@ ul {
 .form input,
 select,
 textarea {
-
   border-radius: 0.5rem;
   border: 0.1rem #a4a4a4 solid;
   font-size: 1.2rem;
@@ -382,5 +382,17 @@ th {
 /* Tables */
 table caption {
   caption-side: top;
-  color: #000000
+  color: #000000;
+}
+
+.orders th {
+  text-align: center;
+}
+
+.products th {
+  text-align: center;
+}
+
+.table th {
+  text-align: center;
 }

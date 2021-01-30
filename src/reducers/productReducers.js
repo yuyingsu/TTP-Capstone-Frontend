@@ -25,12 +25,17 @@ const productReducers = ( state = initialState, action ) => {
                 loading: false,
                 products: action.payload
             };
-          case actionTypes.FETCH_PRODUCT_PAGE_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                productList: action.payload
-            };
+        case actionTypes.FETCH_PRODUCT_PAGE_SUCCESS:
+              let len = 0;
+              if(action.total){
+                len = action.total.length;
+              }  
+              return {
+                    ...state,
+                    loading: false,
+                    productList: action.payload,
+                    total: len
+                };
         case actionTypes.ADD_PRODUCT:
             return {
                 ...state,

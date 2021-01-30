@@ -17,11 +17,9 @@ function Orders(props) {
   const deliver = (order) =>{
       dispatch(deliverOrder(order));
   }
-  console.log("orders" + orders)
-  console.log(allOrders)
   return(
         <div>
-             <Table responsive hover>
+             <Table responsive hover className="orders">
             <thead>
             <tr>
             <th>Id</th>
@@ -36,7 +34,7 @@ function Orders(props) {
             </tr>
             </thead>
             <tbody>
-            {1+1===3 ? orders.map((order) => (
+            { success ? orders.map((order) => (
             <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{JSON.stringify(order.orderItems).substring(1,JSON.stringify(order.orderItems).length-1).replace(/["{}]/g, "").replace(/,/g," ")}</td>

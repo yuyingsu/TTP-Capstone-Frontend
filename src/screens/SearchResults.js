@@ -19,12 +19,13 @@ function SearchResults(props){
     const [sortOrder, setSortOrder] = useState('');
     const [page, setPage] = useState(1);
     const loading = useSelector(state => state.pds.loading);
+    const loadingAll = useSelector(state => state.pds.loadingAll);
     const products= useSelector(state => state.pds.products);
     const productList= useSelector(state => state.pds.productList);
+    const total= useSelector(state => state.pds.total);
     const dispatch = useDispatch();
 
     useEffect(() => {
-     // dispatch(listAllProducts());
       dispatch(listProducts(page,searchKeyword,sortOrder));
       return () => {
       };
@@ -33,11 +34,12 @@ function SearchResults(props){
      // const submitSearchTerm = (term) => {
      //   setSearchKeyword(term);
       //}
-
+      console.log(products.length);
       let res = null;
-      if(!loading && productList){
+      let length=0;
+      if(!loading && !loadingAll && productList){
         console.log(productList)
-      res = productList.map((product) => (
+        res = productList.map((product) => (
         <Col className="d-flex justify-content-center align-items-center">
         <CardProduct price={product.price} countInStock={product.countInStock}
         rating={product.rating} numReviews={product.numReviews} id={product._id}
@@ -46,6 +48,11 @@ function SearchResults(props){
         reviews={product.reviews} key={product._id}/>
         </Col>
        ));
+       if(searchKeyword){
+        length=Math.ceil(total/3);
+      }else{
+        length=Math.ceil(products.length/3);
+      }
       }else{
         <div>Loading...</div>
       }
@@ -54,10 +61,9 @@ function SearchResults(props){
             <Row>
               {res}
             </Row>
-
             {products.length > 3 &&
             <Row className="d-flex justify-content-center align-items-center my-4">
-            <Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/>
+            <Paginations length={Math.max(length,1)} page={page} setPage={setPage}/>
             </Row>}
             </Container>
         </>

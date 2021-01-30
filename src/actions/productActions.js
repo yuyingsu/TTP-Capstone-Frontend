@@ -7,19 +7,23 @@ import { FETCH_PRODUCT_PAGE_REQUEST, FETCH_PRODUCT_PAGE_SUCCESS,
        } from '../constants/productConstants';
 
 export const listProducts = (page, searchKeyword, sortOrder) => dispatch => {
-dispatch({
- type: FETCH_PRODUCT_PAGE_REQUEST
-});
-fetch('http://localhost:5000/api/products?page='+page+
- '&searchKeyword='+searchKeyword+'&sortOrder='+sortOrder)
-   .then(res => res.json())
-   .then(products =>
-     dispatch({
-       type: FETCH_PRODUCT_PAGE_SUCCESS,
-       payload: products
-     })
-   ).catch(error => console.log(error));
-}
+    dispatch({
+     type: FETCH_PRODUCT_PAGE_REQUEST
+    });
+    fetch('http://localhost:5000/api/products?page='+page+
+     '&searchKeyword='+searchKeyword+'&sortOrder='+sortOrder)
+       .then(res => res.json())
+       .then(res => {
+        const { products } = res;
+        const { total } = res;
+        dispatch({
+           type: FETCH_PRODUCT_PAGE_SUCCESS,
+           payload: products,
+           total: total
+         })
+        }
+       ).catch(error => console.log(error));
+    }
 
 export const listAllProducts = () => dispatch => {
  dispatch({

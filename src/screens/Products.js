@@ -32,7 +32,7 @@ function Products(props) {
   ));
   console.log(lists)
   let res = (
-    <Table responsive hover>
+    <Table responsive hover className="products">
     <thead>
       <tr>
         <th>Id</th>
