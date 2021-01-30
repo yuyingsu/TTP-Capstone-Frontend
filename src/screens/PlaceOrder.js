@@ -32,7 +32,6 @@ function PlaceOrder(props) {
       orderItems: carts, shipping, payment, itemsPrice, shippingPrice,
       taxPrice, totalPrice
     }));
-    props.history.push("/order/" + order._id);
   }
   //console.log(loading);
   //console.log(success);

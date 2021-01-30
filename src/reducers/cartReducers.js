@@ -35,6 +35,9 @@ function cartReducers ( state = {} , action ) {
           return { ...state, shipping: action.payload };
         case actionTypes.CART_SAVE_PAYMENT:
           return { ...state, payment: action.payload };
+        case actionTypes.CLEAR_CART:
+          console.log("xxxx");
+          return {...state, carts:[]}
         default:
         return state;
         }

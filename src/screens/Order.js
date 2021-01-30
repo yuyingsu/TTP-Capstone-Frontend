@@ -63,8 +63,6 @@ export default function OrderScreen(props) {
   const deliverHandler = () => {
     dispatch(deliverOrder(myOrder));
   };
-  console.log("myOrder details " + JSON.stringify(orderDetails));
-console.log("myOrder" + myOrder)
   return (success ? <div>
       <h1>myOrder {myOrder._id}</h1>
       <div className="row top">

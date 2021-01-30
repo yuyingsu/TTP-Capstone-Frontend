@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import SearchIcon from "@material-ui/icons/Search";
-
+import React, { useEffect, useState } from 'react';
 function SearchBox(props) {
   const [name, setName] = useState('');
+  const [order, setOrder] = useState('');
+  
+  useEffect(() => {
+    if(order){
+      props.history.push(`/search/name/${name}?sortOrder=${order}`);
+    }
+    }, [order]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     //console.log(props)
-    props.history.push(`/search/name/${name}`);
+    if(name){
+    props.history.push(`/search/name/${name}?sortOrder=${order}`);
+    }
     //props.submitSearchTerm(name);
   };
 
@@ -26,6 +35,13 @@ function SearchBox(props) {
           onChange={(e) => setName(e.target.value)}
         />
          <SearchIcon onClick={submitHandler}className="header__searchIcon" />
+         Sort By{' '}
+          <select name="sortOrder" style={{marginRight:"20px"}} onChange={(e)=>
+            {setOrder(e.target.value)}}>
+            <option value="newest">Newest</option>
+            <option value="lowest">Lowest</option>
+            <option value="highest">Highest</option>
+          </select>
       </div>
     </form>
   );
