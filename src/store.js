@@ -23,7 +23,9 @@ import {
 import { loadState, saveState } from './components/localStorage';
 
 const cartItems = loadState()||[];
-const userInfo = Cookie.getJSON('userInfo') || null;
+const userInfo = localStorage.getItem('userInfo')
+? JSON.parse(localStorage.getItem('userInfo'))
+: null
 //console.log(cartItems);
 const initialState = {
   ct : {carts: cartItems, shipping:{}, payment:{}},

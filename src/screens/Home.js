@@ -26,10 +26,12 @@ function Home(props){
     useEffect(() => {
       dispatch(listAllProducts());
       dispatch(listProducts(page,searchKeyword,sortOrder));
+      dispatch(exitRegister());
       return () => {
       };
       }, [page, sortOrder, searchKeyword]);
 
+      console.log("product list: " + productList)
       const submitSearchTerm = (term) => {
         setSearchKeyword(term);
       }
