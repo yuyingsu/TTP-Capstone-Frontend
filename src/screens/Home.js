@@ -13,7 +13,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import { listAllProducts,listProducts } from '../actions/productActions';
-import { exitRegister } from '../actions/userActions';
 function Home(props){
     const [searchKeyword, setSearchKeyword] = useState('');
     const [sortOrder, setSortOrder] = useState('');
@@ -26,7 +25,6 @@ function Home(props){
     useEffect(() => {
       dispatch(listAllProducts());
       dispatch(listProducts(page,searchKeyword,sortOrder));
-      dispatch(exitRegister());
       return () => {
       };
       }, [page, sortOrder, searchKeyword]);
@@ -56,6 +54,7 @@ function Home(props){
             <Row >
               {res}
             </Row>
+
             {products.length > 3 &&
             <Row className="d-flex justify-content-center align-items-center my-4"><Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/></Row>}
             </Container>

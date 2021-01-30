@@ -24,17 +24,9 @@ class Paginations extends Component {
     render() {
     let array = new Array(3);
     if(this.props.page % 3 == 1){
-        if(this.props.page == this.props.length){
-            array=[this.props.page];
-        }else{
         array=[this.props.page, this.props.page+1, this.props.page+2];
-        }
     }else if(this.props.page % 3 == 2){
-        if(this.props.page == this.props.length){
-            array=[this.props.page-1, this.props.page];
-        }else{
         array=[this.props.page-1, this.props.page, this.props.page+1];
-        }
     }else{
         array=[this.props.page-2, this.props.page-1, this.props.page];
     }

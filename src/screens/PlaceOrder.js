@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
 import { Button } from 'reactstrap';
+import CartItem from '../components/CartItem';
 
 function PlaceOrder(props) {
 
@@ -20,6 +21,8 @@ function PlaceOrder(props) {
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   const taxPrice = 0.15 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
+  const userSignin = useSelector(state => state.userSignin);
+  const { userInfo } = userSignin;
 
   const dispatch = useDispatch();
 
@@ -40,96 +43,114 @@ function PlaceOrder(props) {
 
   }, [success]);
 
-  return <div>
-    <CheckoutSteps step1 step2 step3 step4 ></CheckoutSteps>
-    <div className="placeorder">
-      <div className="placeorder-info">
-        <div>
-          <h3>
-            Shipping
-          </h3>
-          <div>
-            {cart.shipping.address}<br></br>{cart.shipping.city + ", " + cart.shipping.state + " " + cart.shipping.zip}
-          </div>
-        </div>
-        <div>
-          <h3>Payment</h3>
-          <div>
-            Payment Method: {cart.payment.paymentMethod}
-          </div>
-        </div>
-        <div>
-          <ul className="cart-list-container">
-            <li>
-              <h3>
-                Shopping Cart
-          </h3>
-              <div>
-                Price
-          </div>
-            </li>
-            {
-              carts.length === 0 ?
-                <div>
-                  Cart is empty
-          </div>
-                :
-                carts.map(item =>
-                  <li>
-                    <div className="cart-image">
-                      <img src={item.image} alt="product" />
-                    </div>
-                    <div className="cart-name">
-                      <div>
-                        <Link to={"/product/" + item.product}>
-                          {item.name}
-                        </Link>
+  let res = carts.map((cart)=>(
+    <CartItem cart={cart}/>
+  ));
 
-                      </div>
-                      <div>
-                        Qty: {item.qty}
-                      </div>
-                    </div>
-                    <div className="cart-price">
-                      ${item.price}
-                    </div>
-                  </li>
-                )
-            }
+  return (
+    <div>
+      <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+      <div className="row top" style={{margin: "0px"}}>
+        <div className="col-7" style={{marginLeft:"20px"}}>
+          <ul>
+            <li>
+              <div className="card card-body">
+                <h2>Shipping</h2>
+                <p>
+                  {shipping.fullName} <br />
+                  <strong></strong> {shipping.address}<br />{shipping.address2 && shipping.address2}{shipping.address2 && <br />}
+                  {shipping.city + ", " + shipping.state + " " + shipping.zip}
+                </p>
+              </div>
+            </li>
+            <li>
+              <div className="card card-body">
+                <h2>Payment</h2>
+                <p>
+                  <strong>Method:</strong> {payment.paymentMethod}
+                </p>
+              </div>
+            </li>
+            <li>
+              <div className="card card-body">
+                <h2>Order Items</h2>
+                <ul>
+                  {                carts.map(item =>
+                  <div class="item">
+
+                  <div class="image">
+                      <img src={item.image} style={{height:"100px", width:"100px"}}/>
+                  </div>
+
+                  <div class="description">
+                      <h5><Link to={`/product/${item._id}`}><span>{item.name}</span></Link></h5>
+                  </div>
+
+                  <div class="quantity">
+                    <span>{"Qty: " + item.qty}</span>
+                  </div>
+
+                  <div class="total-price ml-auto"><span><h5>{"$" + item.price*item.qty}</h5></span>
+                  </div>
+
+                </div>
+                )}
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
-
-
-      </div>
-      <div className="placeorder-action">
-        <ul>
-          <li>
-            <Button className="button primary full-width" onClick={placeOrderHandler} >Place Order</Button>
-          </li>
-          <li>
-            <h3>Order Summary</h3>
-          </li>
-          <li>
-            <div>Items</div>
-            <div>${itemsPrice}</div>
-          </li>
-          <li>
-            <div>Shipping</div>
-            <div>${shippingPrice}</div>
-          </li>
-          <li>
-            <div>Tax</div>
-            <div>${taxPrice}</div>
-          </li>
-          <li>
-            <div>Order Total</div>
-            <div>${totalPrice}</div>
-          </li>
-        </ul>
+        <div className="col-4">
+          <div className="card card-body">
+            <ul>
+              <li>
+                <h2>Order Summary</h2>
+              </li>
+              <li>
+                <div className="row">
+                  <div>Items</div>
+                  <div>${itemsPrice.toFixed(2)}</div>
+                </div>
+              </li>
+              <li>
+                <div className="row">
+                  <div>Shipping</div>
+                  <div>${shippingPrice.toFixed(2)}</div>
+                </div>
+              </li>
+              <li>
+                <div className="row">
+                  <div>Tax</div>
+                  <div>${taxPrice.toFixed(2)}</div>
+                </div>
+              </li>
+              <li>
+                <div className="row">
+                  <div>
+                    <strong> Order Total</strong>
+                  </div>
+                  <div>
+                    <strong>${totalPrice.toFixed(2)}</strong>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <Button
+                  type="button"
+                  onClick={placeOrderHandler}
+                  className="primary block"
+                  disabled={carts.length === 0}
+                >
+                  Place Order
+                </Button>
+              </li>
+              {loading && "Loading..."}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-
+  );
 }
 
 export default PlaceOrder;

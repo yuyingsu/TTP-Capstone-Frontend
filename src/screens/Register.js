@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { exitRegister, register } from '../actions/userActions';
-import RegisterSuccess from '../components/RegisterSuccess';
+import { register } from '../actions/userActions';
 
 function Register(props) {
 
@@ -10,17 +9,14 @@ function Register(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
-  const [success, setSuccess] = useState(false);
   const userRegister = useSelector(state => state.userRegister);
   const { loading, userInfo, error } = userRegister;
   const dispatch = useDispatch();
+
   const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
-  console.log(userInfo);
   useEffect(() => {
-    if(userInfo)
-    {
-      setSuccess(true);
-      setTimeout(function(){ props.history.push(redirect)} , 5000);
+    if (userInfo) {
+      props.history.push(redirect);
     }
     return () => {
       //
@@ -32,7 +28,7 @@ function Register(props) {
     dispatch(register(name, email, password));
   }
   return <div className="form">
-    {!success?<form onSubmit={submitHandler} >
+    <form onSubmit={submitHandler} >
       <ul className="form-container">
         <li>
           <h2>Create Account</h2>
@@ -75,7 +71,7 @@ function Register(props) {
         </li>
 
       </ul>
-    </form>:<RegisterSuccess/>}
+    </form>
   </div>
 }
 export default Register;

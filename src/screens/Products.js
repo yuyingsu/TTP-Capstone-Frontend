@@ -30,6 +30,7 @@ function Products(props) {
       </td>
     </tr>
   ));
+  console.log(lists)
   let res = (
     <Table responsive hover>
     <thead>
