@@ -2,11 +2,13 @@ import React, { useState} from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SearchBox } from './'
 import { Dropdown, Navbar, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { logout } from '../actions/userActions';
 
 function Header() {
+  const dispatch = useDispatch();
   const cartItems = useSelector(state => state.ct.carts);
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -14,12 +16,18 @@ function Header() {
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
+  const handleLogout = () => {
+    dispatch(logout());
+    //props.history.push("/signin");
+  }
+
+  //console.log("props" + props)
   return (
     <div className="header">
 
         <Link to="/"><img
           className="header__logo"
-          src="/logo.png"
+          src="/logo2.png"
         /></Link>
 
 
@@ -48,6 +56,7 @@ function Header() {
               <DropdownItem tag={Link} to="/profile">Profile</DropdownItem>
                 <DropdownItem tag={Link} to="/orders">Orders</DropdownItem>
                 <DropdownItem tag={Link} to="/products">Products</DropdownItem>
+                <DropdownItem onClick={handleLogout} >Logout</DropdownItem>
               </DropdownMenu>
             </Dropdown>
             :
@@ -77,3 +86,4 @@ function Header() {
 }
 
 export default Header;
+

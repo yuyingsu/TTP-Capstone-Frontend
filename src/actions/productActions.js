@@ -13,15 +13,11 @@ dispatch({
 fetch('http://localhost:5000/api/products?page='+page+
  '&searchKeyword='+searchKeyword+'&sortOrder='+sortOrder)
    .then(res => res.json())
-   .then(res => {
-    const { products } = res;
-    const { total } = res;
-    dispatch({
+   .then(products =>
+     dispatch({
        type: FETCH_PRODUCT_PAGE_SUCCESS,
-       payload: products,
-       total: total
+       payload: products
      })
-    }
    ).catch(error => console.log(error));
 }
 
@@ -31,12 +27,11 @@ export const listAllProducts = () => dispatch => {
  });
  fetch('http://localhost:5000/api/products')
      .then(res => res.json())
-     .then(products => {
+     .then(products =>
        dispatch({
          type: FETCH_PRODUCT_SUCCESS,
          payload: products
-       });
-      }
+       })
      ).catch(error => console.log(error));
  }
 
