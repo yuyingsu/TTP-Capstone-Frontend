@@ -64,8 +64,6 @@ export default function Order(props) {
   const deliverHandler = () => {
     dispatch(deliverOrder(myOrder));
   };
-  console.log("myOrder details " + JSON.stringify(orderDetails));
-console.log("myOrder" + myOrder)
   return (success ? <div>
       <br />
       <h1>Order {myOrder._id}</h1>

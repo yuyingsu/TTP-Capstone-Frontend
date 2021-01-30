@@ -16,7 +16,7 @@ import {
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL
 } from "../constants/orderConstants"
-
+import { CLEAR_CART } from "../constants/cartConstants";
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     console.log(order)
@@ -28,6 +28,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       }
     });
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: newOrder });
+    dispatch({ type: CLEAR_CART });
   } catch (error) {
     dispatch({ type: CREATE_ORDER_FAIL, payload: error.message });
   }

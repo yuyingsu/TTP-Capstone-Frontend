@@ -16,7 +16,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { listAllProducts,listProducts } from '../actions/productActions';
 function SearchResults(props){
     const searchKeyword = props.match.params.name;
-    const [sortOrder, setSortOrder] = useState('');
+    const sortOrder = props.location.search ? props.location.search.split("=")[1] : ''
     const [page, setPage] = useState(1);
     const loading = useSelector(state => state.pds.loading);
     const loadingAll = useSelector(state => state.pds.loadingAll);
@@ -24,8 +24,9 @@ function SearchResults(props){
     const productList= useSelector(state => state.pds.productList);
     const total= useSelector(state => state.pds.total);
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
+      console.log(sortOrder);
       dispatch(listProducts(page,searchKeyword,sortOrder));
       return () => {
       };
@@ -34,7 +35,7 @@ function SearchResults(props){
      // const submitSearchTerm = (term) => {
      //   setSearchKeyword(term);
       //}
-      console.log(products.length);
+      console.log(productList);
       let res = null;
       let length=0;
       if(!loading && !loadingAll && productList){
@@ -48,7 +49,7 @@ function SearchResults(props){
         reviews={product.reviews} key={product._id}/>
         </Col>
        ));
-       if(searchKeyword){
+      if(searchKeyword){
         length=Math.ceil(total/3);
       }else{
         length=Math.ceil(products.length/3);
