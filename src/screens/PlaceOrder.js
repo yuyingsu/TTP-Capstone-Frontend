@@ -36,12 +36,12 @@ function PlaceOrder(props) {
   }
   //console.log(loading);
   //console.log(success);
-  useEffect(() => {
+  /*useEffect(() => {
     if (success) {
       props.history.push("/order/" + order._id);
     }
 
-  }, [success]);
+  }, [success]);*/
 
   let res = carts.map((cart)=>(
     <CartItem cart={cart}/>

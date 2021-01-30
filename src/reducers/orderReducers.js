@@ -44,7 +44,7 @@ function listMyOrderReducer(state = {}, action){
   }
 }
 
-function listAllOrderReducer(state = {}, action){
+function listAllOrderReducer(state = {loading: true}, action){
   switch(action.type){
     case FETCH_ORDER_REQUEST:
       return {
@@ -66,6 +66,7 @@ function listAllOrderReducer(state = {}, action){
       console.log(action.payload);
       return {
         ...state,
+        loading: false,
         orders: state.orders.map(item => item._id != action.payload._id ? item:action.payload)
       }
     default: return state;
