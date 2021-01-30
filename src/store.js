@@ -6,7 +6,8 @@ import {
   createOrderReducer,
   listAllOrderReducer,
   listMyOrderReducer,
-  myOrderListReducer
+  myOrderListReducer,
+  orderPayReducer
 } from './reducers/orderReducers'
 import {
   productReducers,
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   listAllOrder: listAllOrderReducer,
   listMyOrder: listMyOrderReducer,
   myOrderList: myOrderListReducer,
+  orderPay: orderPayReducer,
   pds: productReducers,
   productDetails: productDetailsReducer,
   productReviewSave: productReviewSaveReducer,

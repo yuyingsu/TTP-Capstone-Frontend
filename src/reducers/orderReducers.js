@@ -1,6 +1,23 @@
 import { TramRounded } from '@material-ui/icons';
-import { CREATE_ORDER_REQUEST, CREATE_ORDER_SUCCESS, CREATE_ORDER_FAIL, LIST_MY_ORDER, LIST_MY_ORDER_REQUEST,
-FETCH_ORDER, FETCH_ORDER_REQUEST, DELETE_ORDER, DELIVER_ORDER, MY_ORDER_LIST_REQUEST, MY_ORDER_LIST_SUCCESS, MY_ORDER_LIST_FAIL } from '../constants/orderConstants';
+import {
+  CREATE_ORDER_REQUEST,
+  CREATE_ORDER_SUCCESS,
+  CREATE_ORDER_FAIL,
+  LIST_MY_ORDER,
+  LIST_MY_ORDER_REQUEST,
+  FETCH_ORDER,
+  FETCH_ORDER_REQUEST,
+  DELETE_ORDER,
+  DELIVER_ORDER,
+  MY_ORDER_LIST_REQUEST,
+  MY_ORDER_LIST_SUCCESS,
+  MY_ORDER_LIST_FAIL,
+  ORDER_PAY_FAIL,
+  ORDER_PAY_REQUEST,
+  ORDER_PAY_RESET,
+  ORDER_PAY_SUCCESS,
+ } from '../constants/orderConstants';
+
 function createOrderReducer(state = {}, action) {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
@@ -69,9 +86,25 @@ function myOrderListReducer(state = {
   }
 }
 
+const orderPayReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_PAY_REQUEST:
+      return { loading: true };
+    case ORDER_PAY_SUCCESS:
+      return { loading: false, success: true };
+    case ORDER_PAY_FAIL:
+      return { loading: false, error: action.payload };
+    case ORDER_PAY_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
 export {
   createOrderReducer,
   listMyOrderReducer,
   listAllOrderReducer,
-  myOrderListReducer
+  myOrderListReducer,
+  orderPayReducer
 }

@@ -1,64 +1,77 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-} from 'reactstrap';
-import { CardProduct, Spinners} from '../components/';
-import Paginations from './Paginations'
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Row, Col } from 'reactstrap';
-import { listAllProducts,listProducts } from '../actions/productActions';
-function Home(props){
-    const [searchKeyword, setSearchKeyword] = useState('');
-    const [sortOrder, setSortOrder] = useState('');
-    const [page, setPage] = useState(1);
-    const loading = useSelector(state => state.pds.loading);
-    const products= useSelector(state => state.pds.products);
-    const productList= useSelector(state => state.pds.productList);
-    const dispatch = useDispatch();
+import { register } from '../actions/userActions';
 
-    useEffect(() => {
-      dispatch(listAllProducts());
-      dispatch(listProducts(page,searchKeyword,sortOrder));
-      return () => {
-      };
-      }, [page, sortOrder, searchKeyword]);
+function Register(props) {
 
-      const submitSearchTerm = (term) => {
-        setSearchKeyword(term);
-      }
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+  const userRegister = useSelector(state => state.userRegister);
+  const { loading, userInfo, error } = userRegister;
+  const dispatch = useDispatch();
 
-      let res = null;
-      if(!loading && productList){
-        //console.log(productList)
-      res = productList.map((product) => (
-
-        <Col className="d-flex justify-content-center align-items-center">
-        <CardProduct price={product.price} countInStock={product.countInStock}
-        rating={product.rating} numReviews={product.numReviews} id={product._id}
-        name={product.name} image={product.image} brand={product.brand}
-        category={product.category} description={product.description}
-        reviews={product.reviews} key={product._id}/>
-        </Col>
-       ));
-      }else{
-        <div>Loading...</div>
-      }
-      return(
-          <><Container>
-            <Row >
-              {res}
-            </Row>
-
-            {products.length > 3 &&
-            <Row className="d-flex justify-content-center align-items-center my-4"><Paginations length={Math.ceil(products.length/3)} page={page} setPage={setPage}/></Row>}
-            </Container>
-        </>
-      )
+  const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
     }
-export default Home;
+    return () => {
+      //
+    };
+  }, [userInfo]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(register(name, email, password));
+  }
+  return <div className="form">
+    <form onSubmit={submitHandler} >
+      <ul className="form-container">
+        <li>
+          <h2>Create Account</h2>
+        </li>
+        <li>
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
+        </li>
+        <li>
+          <label htmlFor="name">
+            Name
+          </label>
+          <input type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}>
+          </input>
+        </li>
+        <li>
+          <label htmlFor="email">
+            Email
+          </label>
+          <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>
+          </input>
+        </li>
+        <li>
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}>
+          </input>
+        </li>
+        <li>
+          <label htmlFor="rePassword">Re-Enter Password</label>
+          <input type="password" id="rePassword" name="rePassword" onChange={(e) => setRePassword(e.target.value)}>
+          </input>
+        </li>
+        <li>
+          <button type="submit" className="button primary">Register</button>
+        </li>
+        <li>
+          Already have an account?
+          <Link to={redirect === "/" ? "signin" : "signin?redirect=" + redirect} className="button secondary text-center" >Sign In</Link>
+
+        </li>
+
+      </ul>
+    </form>
+  </div>
+}
+export default Register;

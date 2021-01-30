@@ -21,9 +21,49 @@ ul {
   margin: 0;
   list-style-type: none;
 }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.row.center {
+  justify-content: center;
+}
+.row.top {
+  align-items: flex-start;
+}
+.row.start {
+  justify-content: flex-start;
+}
+.col-1 {
+  flex: 1 1 25rem;
+}
+.col-2 {
+  flex: 2 1 50rem;
+}
+.col-3 {
+  flex: 32 1 75rem;
+}
+
+/* Card */
+.card {
+  border: 0.1rem #c0c0c0 solid;
+  background-color: #f8f8f8;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+.card-body {
+  padding: 1rem;
+}
+.card-body > * {
+  margin-bottom: 0.5rem;
+}
+.price {
+  font-size: 2rem;
+}
 
 /* Checkout Steps */
-
 .checkout-steps {
   display: flex;
   justify-content: space-between;
@@ -337,4 +377,10 @@ th {
 }
 .product-page li {
   margin-top: 20px;
+}
+
+/* Tables */
+table caption {
+  caption-side: top;
+  color: #000000
 }

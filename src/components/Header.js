@@ -27,7 +27,7 @@ function Header() {
 
         <Link to="/"><img
           className="header__logo"
-          src="/logo.png"
+          src="/logo2.png"
         /></Link>
 
 
