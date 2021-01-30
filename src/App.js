@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/products" component={Products} />
           <Route exact path="/orders" component={Orders} />
-          <Route exact path="/order/:id" exact render={({history, match, location}) =>  <Order history={history} match={match} location={location}/> } />
+          <Route path="/order/:id" component={Order}></Route>
         </div>
       </BrowserRouter>
   );

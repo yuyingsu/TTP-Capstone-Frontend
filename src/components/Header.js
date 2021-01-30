@@ -46,6 +46,7 @@ function Header() {
 
               <Dropdown isOpen={dropdownOpen} toggle={toggle}>
               <DropdownToggle
+                style={{color:"#eb6864", cursor:"pointer"}}
                 tag="span"
                 data-toggle="dropdown"
                 aria-expanded={dropdownOpen}
@@ -69,8 +70,12 @@ function Header() {
 
 
           <div className="header__option">
-            <span className="header__optionLineOne">Returns</span>
+           <span className="header__optionLineOne">Returns</span>
+           {userInfo ?
+           <span className="header__optionLineTwo"><Link to="/myorders">& Orders</Link></span>
+           :
             <span className="header__optionLineTwo">& Orders</span>
+           }
           </div>
 
           <div className="header__optionBasket">

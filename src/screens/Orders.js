@@ -16,7 +16,9 @@ function Orders(props) {
   }, []);
   const deliver = (order) =>{
       dispatch(deliverOrder(order));
-  } 
+  }
+  console.log("orders" + orders)
+  console.log(allOrders)
   return(
         <div>
              <Table responsive hover>
