@@ -14,7 +14,7 @@ function MyOrders(props) {
 
     };
   }, [])
-console.log(JSON.stringify(orders))
+
   return <div className="profile-orders content-margined">
 {
   loadingOrders ? <div>Loading...</div> :
@@ -34,7 +34,7 @@ console.log(JSON.stringify(orders))
             <td>{order._id}</td>
             <td>{order.createdAt}</td>
             <td>{"$" + order.totalPrice.toFixed(2)}</td>
-            <td>{order.isPaid && "YES"}</td>
+            <td>{order.isPaid}</td>
             <td>
               <Link to={"/order/" + order._id}>DETAILS</Link>
             </td>
