@@ -7,8 +7,9 @@ import { deliverOrder, listMyOrder, payOrder } from '../actions/orderActions';
 import {
   ORDER_PAY_RESET,
 } from '../constants/orderConstants';
+import { Button } from 'reactstrap';
 
-export default function OrderScreen(props) {
+export default function Order(props) {
   const orderId = props.match.params.id;
   console.log(orderId)
   const [sdkReady, setSdkReady] = useState(false);
@@ -18,17 +19,18 @@ export default function OrderScreen(props) {
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
-
+  const { success: successDelivery } = useSelector((state => state.listAllOrder))
   const orderPay = useSelector((state) => state.orderPay);
   const {
     loading: loadingPay,
     error: errorPay,
     success: successPay,
   } = orderPay;
-
+  console.log("success delivery: " + successDelivery);
+  console.log("success pay" + successPay)
   useEffect(() => {
     const addPayPalScript = async () => {
-      const { data } = await Axios.get('/api/config/paypal');
+      const { data } = await Axios.get('http://localhost:5000/api/config/paypal');
       const script = document.createElement('script');
       script.type = 'text/javascript';
       script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
@@ -41,6 +43,7 @@ export default function OrderScreen(props) {
     if (
       !myOrder ||
       successPay ||
+      myOrder.isDelivered ||
       (myOrder && myOrder._id !== orderId)
     ) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -66,19 +69,18 @@ export default function OrderScreen(props) {
   console.log("myOrder details " + JSON.stringify(orderDetails));
 console.log("myOrder" + myOrder)
   return (success ? <div>
-      <h1>myOrder {myOrder._id}</h1>
-      <div className="row top">
+      <h1>Order {myOrder._id}</h1>
+      <div className="row top" style={{margin: "0px"}}>
         <div className="col-8">
           <ul>
             <li>
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {myOrder.shipping.fullName} <br />
-                  <strong>Address: </strong> {myOrder.shipping.address}, {myOrder.shipping.address2},
+                  {myOrder.shipping.fullName} <br />
+                  {myOrder.shipping.address}<br /> {myOrder.shipping.address2 && myOrder.shippingaddress2}{myOrder.shippingaddress2 && <br />}
                   {myOrder.shipping.city},{' '}
-                  {myOrder.shipping.state},
-                  {myOrder.shipping.zip}
+                  {myOrder.shipping.state + " " + myOrder.shipping.zip}
                 </p>
                 {myOrder.isDelivered ? (
                   <h5>
@@ -93,7 +95,7 @@ console.log("myOrder" + myOrder)
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {myOrder.paymentMethod}
+                  <strong>Method:</strong> {myOrder.payment.paymentMethod}
                 </p>
                 {myOrder.isPaid ? (
                     <h5>Paid at {myOrder.paidAt}</h5>
@@ -103,8 +105,6 @@ console.log("myOrder" + myOrder)
               </div>
             </li>
             <li>
-              <div className="card card-body">
-                <h2>myOrder Items</h2>
                 <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
@@ -130,7 +130,6 @@ console.log("myOrder" + myOrder)
                 )}
                 </ul>
               </div>
-              </div>
             </li>
           </ul>
         </div>
@@ -138,7 +137,7 @@ console.log("myOrder" + myOrder)
           <div className="card card-body">
             <ul>
               <li>
-                <h2>myOrder Summary</h2>
+                <h2>Order Summary</h2>
               </li>
               <li>
                 <div className="row">
@@ -161,7 +160,7 @@ console.log("myOrder" + myOrder)
               <li>
                 <div className="row">
                   <div>
-                    <strong> myOrder Total</strong>
+                    <strong>Total</strong>
                   </div>
                   <div>
                     <strong>${myOrder.totalPrice.toFixed(2)}</strong>
@@ -180,7 +179,7 @@ console.log("myOrder" + myOrder)
                       {loadingPay && "Loading..."}
 
                       <PayPalButton
-                        amount={myOrder.totalPrice}
+                        amount={myOrder.totalPrice.toFixed(2)}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton>
                     </p>
@@ -189,13 +188,13 @@ console.log("myOrder" + myOrder)
               )}
               {userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
                 <li>
-                  <button
+                  <Button
                     type="button"
                     className="primary block"
                     onClick={deliverHandler}
                   >
-                    Deliver myOrder
-                  </button>
+                    Deliver Order
+                  </Button>
                 </li>
               )}
             </ul>
