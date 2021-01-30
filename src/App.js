@@ -3,7 +3,7 @@ import { Header } from './components'
 import Products from './screens/Products';
 import Order from './screens/Order';
 import Orders from './screens/Orders';
-import { Cart, Home, MyOrders, Payment, PlaceOrder, Product, Profile, Register, SearchResults, Shipping, Signin } from './screens/';
+import { Cart, Home, Payment, PlaceOrder, Product, Profile, Register, SearchResults, Shipping, Signin } from './screens/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -14,7 +14,6 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/cart" component={Cart}/>
           <Route path="/cart/:id" exact render={({history, match, location}) =>  <Cart history={history} match={match} location={location}/> } />
-          <Route exact path="/myorders" component={MyOrders} />
           <Route exact path="/payment" component={Payment} />
           <Route exact path="/placeorder" component={PlaceOrder} />
           <Route path="/product/:id" component={Product} />

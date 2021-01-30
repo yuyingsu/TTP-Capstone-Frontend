@@ -21,49 +21,9 @@ ul {
   margin: 0;
   list-style-type: none;
 }
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-}
-.row.center {
-  justify-content: center;
-}
-.row.top {
-  align-items: flex-start;
-}
-.row.start {
-  justify-content: flex-start;
-}
-.col-1 {
-  flex: 1 1 25rem;
-}
-.col-2 {
-  flex: 2 1 50rem;
-}
-.col-3 {
-  flex: 32 1 75rem;
-}
-
-/* Card */
-.card {
-  border: 0.1rem #c0c0c0 solid;
-  background-color: #f8f8f8;
-  border-radius: 0.5rem;
-  margin: 1rem;
-}
-.card-body {
-  padding: 1rem;
-}
-.card-body > * {
-  margin-bottom: 0.5rem;
-}
-.price {
-  font-size: 2rem;
-}
 
 /* Checkout Steps */
+
 .checkout-steps {
   display: flex;
   justify-content: space-between;
@@ -77,8 +37,8 @@ ul {
   padding-top: 1rem;
 }
 .checkout-steps > div.active {
-  border-top: 0.3rem #eb6864 solid;
-  color: #eb6864;
+  border-top: 0.3rem #f08000 solid;
+  color: #f08000;
 }
 
 /* Rating */
@@ -252,7 +212,7 @@ ul {
 .header__searchIcon {
   padding: 5px;
   height: 22px !important;
-  background-color: #eb6864;
+  background-color: #cd9042;
   cursor: pointer;
 }
 
@@ -326,61 +286,4 @@ textarea {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Product Page */
-.product-page div {
-  background-color: rgb(249, 252, 255);
-  color: black;
-}
-
-.photo-gallery img {
-  float: left;
-  margin: 30px;
-}
-
-.product-page h1 {
-  text-align: left;
-  margin: 10px;
-}
-
-.product-table {
-  padding-top: 3em;
-  float: left;
-}
-
-.product-page table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 80%;
-  border: none;
-  float: left;
-}
-
-.product-page td,
-th {
-  text-align: left;
-  padding: 8px;
-}
-
-.product-page p {
-  font-size: 16px;
-}
-
-.game-description h1 {
-  text-align: center;
-}
-.game-description div {
-  float: center;
-  width: 40%;
-  padding-right: 2em;
-}
-.product-page li {
-  margin-top: 20px;
-}
-
-/* Tables */
-table caption {
-  caption-side: top;
-  color: #000000
 }
