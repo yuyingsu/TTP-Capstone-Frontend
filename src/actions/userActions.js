@@ -1,9 +1,15 @@
 import Axios from "axios";
-import Cookie from 'js-cookie';
 import {
-  USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS,
-  USER_SIGNIN_FAIL, USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS, USER_REGISTER_FAIL, USER_LOGOUT, USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL,
+  USER_SIGNIN_REQUEST,
+  USER_SIGNIN_SUCCESS,
+  USER_SIGNIN_FAIL,
+  USER_REGISTER_REQUEST,
+  USER_REGISTER_SUCCESS,
+  USER_REGISTER_FAIL,
+  USER_LOGOUT,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
   EXIT_REGISTER
 } from "../constants/userConstants";
 
@@ -25,7 +31,6 @@ const update = ({ userId, name, email, password }) => async (dispatch, getState)
 }
 
 const signin = (email, password) => async (dispatch) => {
-  //console.log(email, password)
   dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
   try {
     const { data } = await Axios.post("http://localhost:5000/api/users/signin", { email, password });
@@ -48,13 +53,13 @@ const register = (name, email, password) => async (dispatch) => {
 }
 
 const logout = () => (dispatch) => {
-  Cookie.remove("userInfo");
+  localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT })
 }
 
 const exitRegister = () => (dispatch) => {
-  Cookie.remove("userInfo");
-  console.log("action");
+  localStorage.removeItem("userInfo");
   dispatch({type: EXIT_REGISTER})
 }
+
 export { signin, register, logout, update, exitRegister };

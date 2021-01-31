@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { logout, update } from '../actions/userActions';
-//import { listMyOrders } from '../actions/orderActions';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalForm from '../components/ModalForm';
 import { Table, Button } from 'reactstrap';
 import { deleteProduct } from '../actions/productActions';
+
 function Products(props) {
   const products = useSelector(state => state.pds.products);
   const dispatch = useDispatch();
   const deleteAProduct = (product) =>{
     dispatch(deleteProduct(product))
   }
+
   let lists = products.map((product) => (
     <tr key={product._id}>
-      <td>{product._id}</td>
+      <td><Link to={'/product/' + product._id}>{product._id}</Link></td>
       <td>{product.name}</td>
       <td>{"$" + product.price}</td>
       <td>{product.countInStock}</td>
@@ -30,7 +30,7 @@ function Products(props) {
       </td>
     </tr>
   ));
-  console.log(lists)
+
   let res = (
     <Table responsive hover className="products">
     <thead>
@@ -45,14 +45,15 @@ function Products(props) {
       </tr>
     </thead>
     <tbody>
-        {lists}
+      {lists}
     </tbody>
   </Table>);
-  return(
-        <div>
-            {res}
-            <ModalForm buttonLabel={"Add"} product={null}/>
-        </div>
+
+  return (
+    <div>
+      {res}
+      <ModalForm buttonLabel={"Add"} product={null}/>
+    </div>
   );
 }
 

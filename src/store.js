@@ -1,13 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from "redux-thunk";
 import cartReducers from './reducers/cartReducers'
-import Cookie from 'js-cookie'
 import {
   createOrderReducer,
   listAllOrderReducer,
   listMyOrderReducer,
   myOrderListReducer,
-  orderPayReducer
+  orderPayReducer,
 } from './reducers/orderReducers'
 import {
   productReducers,
@@ -26,11 +25,12 @@ const cartItems = loadState()||[];
 const userInfo = localStorage.getItem('userInfo')
 ? JSON.parse(localStorage.getItem('userInfo'))
 : null
-//console.log(cartItems);
+
 const initialState = {
   ct : {carts: cartItems, shipping:{}, payment:{}},
   userSignin: { userInfo }
 };
+
 const rootReducer = combineReducers({
   ct: cartReducers,
   createOrder: createOrderReducer,
@@ -54,7 +54,9 @@ const store = createStore(
   initialState,
   storeEnhancers(applyMiddleware(thunk))
 );
+
 store.subscribe(() => {
   saveState(store.getState().ct.carts);
 });
+
 export default store;

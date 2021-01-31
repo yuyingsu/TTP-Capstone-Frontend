@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Rating(props) {
+function Rating(props) {
   return !props.value ? (
     <div></div>
   ) : (
@@ -64,3 +64,5 @@ export default function Rating(props) {
     </div>
   );
 }
+
+export default Rating;

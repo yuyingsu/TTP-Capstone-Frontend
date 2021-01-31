@@ -17,9 +17,9 @@ import {
   ORDER_PAY_FAIL
 } from "../constants/orderConstants"
 import { CLEAR_CART } from "../constants/cartConstants";
+
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
-    console.log(order)
     dispatch({ type: CREATE_ORDER_REQUEST, payload: order });
     const { userSignin: { userInfo } } = getState();
     const { data: { data: newOrder } } = await Axios.post("http://localhost:5000/api/orders", order, {
@@ -40,13 +40,14 @@ export const listMyOrder = (order_id) =>  (dispatch,getState) => {
       type: LIST_MY_ORDER_REQUEST,
     })
     const { userSignin: { userInfo } } = getState();
-    console.log(userInfo.token);
-    fetch('http://localhost:5000/api/orders/'+order_id, {
+    fetch('http://localhost:5000/api/orders/' + order_id, {
       headers: {
         'content-type': 'application/json',
         Authorization: 'Bearer ' + userInfo.token
       }
-    }).then(res => res.json()).then(data =>
+    })
+    .then(res => res.json())
+    .then(data =>
       dispatch({
         type: LIST_MY_ORDER,
         payload: data
@@ -58,73 +59,68 @@ export const listMyOrder = (order_id) =>  (dispatch,getState) => {
 }
 
 export const listAllOrder = () => (dispatch, getState) => {
-  try{
   dispatch({
-      type: FETCH_ORDER_REQUEST
+    type: FETCH_ORDER_REQUEST
   })
   const { userSignin: { userInfo } } = getState();
   fetch('http://localhost:5000/api/orders', {
     headers: {
-    'content-type': 'application/json',
-    Authorization: 'Bearer ' + userInfo.token
-  }
-  }).then(res => res.json())
-      .then(orders =>
-        dispatch({
-          type: FETCH_ORDER,
-          payload: orders
-        })
-      ).catch(error => console.log(error));
-  }
-  catch(e){
-  }
+      'content-type': 'application/json',
+      Authorization: 'Bearer ' + userInfo.token
+    }
+  })
+  .then(res => res.json())
+  .then(orders =>
+    dispatch({
+      type: FETCH_ORDER,
+      payload: orders
+    })
+  )
+  .catch(error => console.log(error));
 }
 
-export const deleteOrder = (order) => (dispatch, getState) => {
-  try {
-    const { userSignin: { userInfo } } = getState();
-    fetch('http://localhost:5000/api/orders/'+order._id,{
-        method: 'DELETE',
-        headers: {
-          'content-type': 'application/json',
-          'Authorization': 'Bearer ' + userInfo.token
-        },
-        body: JSON.stringify(order)
-      })
-      .then(res => res.json())
-      .then(order =>
-       dispatch({
-         type: DELETE_ORDER,
-         payload: order
-       }
-     )).catch(error => console.log(error));
-  }
-  catch(error){
 
-  }
+export const deleteOrder = (order) => (dispatch, getState) => {
+  const { userSignin: { userInfo } } = getState();
+  fetch('http://localhost:5000/api/orders/' + order._id, {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + userInfo.token
+    },
+    body: JSON.stringify(order)
+  })
+  .then(res => res.json())
+  .then(order =>
+    dispatch({
+      type: DELETE_ORDER,
+      payload: order
+    }
+  ))
+  .catch(error => console.log(error));
 }
 
 export const deliverOrder = (order) => (dispatch, getState) => {
   try {
     const { userSignin: { userInfo } } = getState();
     fetch('http://localhost:5000/api/orders/'+order._id+"/deliver",{
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-          'Authorization': 'Bearer ' + userInfo.token
-        },
-        body: JSON.stringify(order)
-      })
-      .then(res => res.json())
-      .then(order =>
-       dispatch({
-         type: DELIVER_ORDER,
-         payload: order
-       }
-     )).catch(error => console.log(error));
-  }
-  catch(error){
-
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': 'Bearer ' + userInfo.token
+      },
+      body: JSON.stringify(order)
+    })
+    .then(res => res.json())
+    .then(order =>
+      dispatch({
+        type: DELIVER_ORDER,
+        payload: order
+      }
+    ))
+    .catch(error => console.log(error));
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -142,14 +138,9 @@ export const listMyOrders = () => async (dispatch, getState) => {
   }
 }
 
-export const payOrder = (order, paymentResult) => async (
-  dispatch,
-  getState
-) => {
+export const payOrder = (order, paymentResult) => async (dispatch, getState) => {
   dispatch({ type: ORDER_PAY_REQUEST, payload: { order, paymentResult } });
-  const {
-    userSignin: { userInfo },
-  } = getState();
+  const { userSignin: { userInfo } } = getState();
   try {
     const { data } = Axios.put(`http://localhost:5000/api/orders/${order._id}/pay`, paymentResult, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -163,4 +154,3 @@ export const payOrder = (order, paymentResult) => async (
     dispatch({ type: ORDER_PAY_FAIL, payload: message });
   }
 };
-

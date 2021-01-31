@@ -14,11 +14,9 @@ function SearchBox(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    //console.log(props)
-    if(name){
-    props.history.push(`/search/name/${name}?sortOrder=${order}`);
+    if (name) {
+      props.history.push(`/search/name/${name}?sortOrder=${order}`);
     }
-    //props.submitSearchTerm(name);
   };
 
   return (

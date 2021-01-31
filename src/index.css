@@ -217,7 +217,6 @@ ul {
 }
 
 /* Header */
-
 .header {
   height: 60px;
   display: flex;
@@ -228,6 +227,7 @@ ul {
   z-index: 100;
 
 }
+
 .header__logo {
   width: 100px;
   object-fit: contain;
