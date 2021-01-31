@@ -40,7 +40,7 @@ function CardProduct(props) {
         </span>
       </div>
 
-      <div class="total-price ml-auto"><span><h5>{"$" + price}</h5></span>
+      <div class="total-price ml-auto"><span><h5>{"$" + price.toFixed(2)}</h5></span>
       <span><a href="#" onClick={deleteProduct}>Remove</a></span>
       </div>
 

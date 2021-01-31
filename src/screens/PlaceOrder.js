@@ -81,7 +81,7 @@ function PlaceOrder(props) {
                         <span>{"Qty: " + item.qty}</span>
                       </div>
 
-                      <div class="total-price ml-auto"><span><h5>{"$" + item.price*item.qty}</h5></span>
+                      <div class="total-price ml-auto"><span><h5>{"$" + (item.price * item.qty).toFixed(2)}</h5></span>
                       </div>
 
                     </div>

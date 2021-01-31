@@ -38,7 +38,7 @@ function Home(props) {
   }
 
   return (
-    <Container>
+    <Container style={{marginTop: "40px"}}>
       <Row >
         {res}
       </Row>

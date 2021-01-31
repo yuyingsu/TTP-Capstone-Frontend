@@ -35,7 +35,7 @@ function Cart(props) {
         </div>
       <div className="cart-action">
         <h5>
-          Subtotal ({carts.reduce((a, c) => a + c.qty, 0).toFixed(2)} items):
+          Subtotal ({carts.reduce((a, c) => a + c.qty, 0)} items):
           ${carts.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2)}
         </h5>
         <Button onClick={checkoutHandler} className="button primary full-width" disabled={carts.length === 0}>

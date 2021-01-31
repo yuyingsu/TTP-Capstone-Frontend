@@ -5,7 +5,7 @@ import { Rating } from './';
 
 function CardProduct(props) {
   return (
-    <Card style={{height:"400px", width: "300px", border: "none", background:"none"}} className="mt-4">
+    <Card style={{height:"400px", width: "300px", border: "none", background:"none"}}>
     <Link to={`/product/${props.id}`}>
     <CardImg top width="100%" src={props.image} alt="Card image cap" style={{height:"300px"}}/>
     <CardTitle>{props.name}</CardTitle></Link>
