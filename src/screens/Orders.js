@@ -40,12 +40,13 @@ function Orders(props) {
       </thead>
       <tbody>
       { success ? orders.map((order) => (
-      <tr key={order._id}>
+      <tr key={order._id} style={{textAlign:"left"}}>
           <td><Link to={'/order/' + order._id}>{order._id}</Link></td>
-          <td>{JSON.stringify(order.orderItems).substring(1,JSON.stringify(order.orderItems).length-1).replace(/["{}]/g, "").replace(/,/g," ")}</td>
-          <td>{JSON.stringify(order.shipping).substring(1,JSON.stringify(order.orderItems).length-1).replace(/["{}]/g, "").replace(/,/g," ")}</td>
-          <td>{JSON.stringify(order.payment).substring(1,JSON.stringify(order.orderItems).length-1).replace(/["{}]/g, "").replace(/,/g," ")
-          .replace("paymentMethod","Method")}</td>
+          <td>{JSON.stringify(order.orderItems).substring(1,JSON.stringify(order.orderItems).length-1).replace(/["{}]/g, "").replace(/,/g,'\n').replace(/:/g,': ')}</td>
+          <td>{JSON.stringify(order.shipping).substring(1,JSON.stringify(order.orderItems).length-1).replace(/["{}]/g, "").replace(/,/g,'\n')
+          .replace("fullName","name").replace(/:/g,': ')}</td>
+          <td>{JSON.stringify(order.payment).substring(1,JSON.stringify(order.orderItems).length-1).replace(/["{}]/g, "").replace(/,/g,'\n')
+          .replace("paymentMethod","method").replace(/:/g,': ')}</td>
           <td>{order.itemsPrice.toFixed(2)}</td>
           <td>{order.shippingPrice.toFixed(2)}</td>
           <td>{order.taxPrice.toFixed(2)}</td>

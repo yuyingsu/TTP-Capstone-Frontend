@@ -9,8 +9,7 @@ import {
   USER_LOGOUT,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL,
-  EXIT_REGISTER
+  USER_UPDATE_FAIL
 } from "../constants/userConstants";
 
 const update = ({ userId, name, email, password }) => async (dispatch, getState) => {
@@ -57,9 +56,5 @@ const logout = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT })
 }
 
-const exitRegister = () => (dispatch) => {
-  localStorage.removeItem("userInfo");
-  dispatch({type: EXIT_REGISTER})
-}
 
-export { signin, register, logout, update, exitRegister };
+export { signin, register, logout, update };

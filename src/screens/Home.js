@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import { listAllProducts,listProducts } from '../actions/productActions';
-import { exitRegister } from '../actions/userActions';
 
 function Home(props) {
   const [searchKeyword, setSearchKeyword] = useState('');

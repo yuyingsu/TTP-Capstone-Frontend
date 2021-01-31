@@ -8,8 +8,7 @@ import {
   USER_LOGOUT,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL,
-  EXIT_REGISTER
+  USER_UPDATE_FAIL
 } from "../constants/userConstants";
 
 function userRegisterReducer(state = {}, action) {
@@ -20,8 +19,6 @@ function userRegisterReducer(state = {}, action) {
       return { loading: false, userInfo: action.payload };
     case USER_REGISTER_FAIL:
       return { loading: false, error: action.payload };
-    case EXIT_REGISTER:
-      return {};
     default: return state;
   }
 }

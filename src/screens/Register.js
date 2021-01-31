@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { exitRegister, register } from '../actions/userActions';
+import { register } from '../actions/userActions';
 import RegisterSuccess from '../components/RegisterSuccess';
 
 function Register(props) {
@@ -12,12 +12,13 @@ function Register(props) {
   const [rePassword, setRePassword] = useState('');
   const [success, setSuccess] = useState(false);
   const userRegister = useSelector(state => state.userRegister);
-  const { loading, userInfo, error } = userRegister;
+  const { loading, userInfo, error, leave } = userRegister;
   const dispatch = useDispatch();
   const redirect = '/';
 
   useEffect(() => {
-    if(userInfo)
+    console.log(userInfo);
+    if(userInfo && userInfo.email==email)
     {
       setSuccess(true);
       setTimeout(function(){ props.history.push(redirect)} , 5000);
@@ -28,7 +29,6 @@ function Register(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(register(name, email, password));
-    dispatch(exitRegister());
   }
 
   return <div className="form mt-4">

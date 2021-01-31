@@ -12,7 +12,7 @@ export default function Order(props) {
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.listMyOrder);
   const dispatch = useDispatch();
-  const { myOrder, success, error } = orderDetails;
+  const { myOrder, success, error, leave } = orderDetails;
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -40,7 +40,8 @@ export default function Order(props) {
       !myOrder ||
       successPay ||
       myOrder.isDelivered ||
-      (myOrder && myOrder._id !== orderId)
+      (myOrder && myOrder._id !== orderId) ||
+      leave
     ) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(listMyOrder(orderId));
@@ -176,7 +177,8 @@ export default function Order(props) {
                   ></PayPalButton>
                 </li>
               }
-              {userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
+              {userInfo?
+              userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
                 <li>
                   <Button
                     type="button"
@@ -186,7 +188,7 @@ export default function Order(props) {
                     Deliver Order
                   </Button>
                 </li>
-              )}
+              ):null}
             </ul>
           </div>
         </div>

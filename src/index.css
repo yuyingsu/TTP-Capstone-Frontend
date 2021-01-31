@@ -225,7 +225,6 @@ ul {
   position: sticky;
   top: 0;
   z-index: 100;
-
 }
 
 .header__logo {
@@ -339,11 +338,6 @@ textarea {
   margin: 30px;
 }
 
-.product-page h1 {
-  text-align: left;
-  margin: 10px;
-}
-
 .product-table {
   padding-top: 3em;
   float: left;
@@ -363,20 +357,21 @@ th {
   padding: 8px;
 }
 
-.product-page p {
-  font-size: 16px;
+.game-description {
+  text-align: left;
 }
 
-.game-description h1 {
-  text-align: center;
-}
-.game-description div {
-  float: center;
-  width: 40%;
-  padding-right: 2em;
-}
 .product-page li {
-  margin-top: 20px;
+  margin: 20px;
+}
+
+.product-page select {
+  background: #eb6864;
+  color: #fff !important;
+  font-weight: bold;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  padding: 5px;
 }
 
 /* Tables */

@@ -51,15 +51,17 @@ function Product(props) {
     ) : error ? (
       <div>{error} </div>
     ) : (
-    <div className="product">
-      <div className="photo-gallery">
+        <div className="product">
+        <div className="container">
+        <div className="row">
+        <div className="col-sm">
+        <div className="photo-gallery">
         <img src={product.image} style={{height: "450px", width: "450px"}} alt="game pic" />
-      </div>
-      <div class="container">
-        <div class="row">
-        <div class="col-sm">
-        <table style={{marginLeft:"100px", marginTop:"40px"}}>
-          <caption><h5>{product.name}</h5></caption>
+        </div>
+        </div>
+        <div className="col-sm">
+        <table style={{marginLeft:"100px", marginBottom:"200px", font: "1.2em Fira Sans, sans-serif"}}>
+          <caption><h3 style={{marginLeft:"5px"}}>{product.name}</h3></caption>
           <tr>
           <th>Brand</th>
           <td>{product.brand}</td>
@@ -72,15 +74,13 @@ function Product(props) {
           <th>Reviews</th>
           <td>{product.numReviews}</td>
           </tr>
-          <tr>
-            <th>Description</th>
-            <td>{product.description}</td>
-          </tr>
+          <th>Price</th>
+          <td>${product.price}</td>
         </table>
         </div>
-        <div class="col-sm">
-        <span className="cartbttn">
-          <select onChange={(e)=>{setQty(e.target.value)}} style={{marginTop:"120px"}}>
+        <div className="col-sm">
+        <div className="cartbttn" style={{marginLeft:"100px", marginBottom:"200px"}}>
+          <select onChange={(e)=>{setQty(e.target.value)}}>
           {[...Array(product.countInStock).keys()].slice(0,10).map(x =>
             <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
           )}
@@ -90,18 +90,25 @@ function Product(props) {
             Add to Cart
           </Button>
           </div>
-        </span>
         </div>
         </div>
-        <div class="row">
-        <div class="col">
-        <div style={{marginRight:"450px"}}>
-        <div className="content-margined">
-          <h5 style={{marginTop:"300px"}}>Reviews</h5>
+        </div>
+        <div className="row">
+        <div className="col">
+          <div style={{ marginTop:"100px",marginLeft:"20px" }} className="game-description">
+          <h4>Description: </h4>
+          <div style={{marginTop:"20px"}}>{product.description}</div>
+          </div>
+        </div>
+        </div>
+        <div className="row">
+        <div className="col">
+        <div className="content-margined" style={{marginTop:"100px"}}>
+          <h4 style={{textAlign:"left", marginLeft:"20px"}}>Reviews</h4>
           {!product.reviews.length && <div>There is no review</div>}
           <ul className="review" id="reviews">
             {product.reviews.map((review) => (
-              <li key={review._id}>
+              <li key={review._id} style={{textAlign:"left"}}>
                 <div>{review.name}</div>
                 <div>
                   {console.log(JSON.stringify(review))}
@@ -112,7 +119,7 @@ function Product(props) {
               </li>
             ))}
             <li>
-              <h5>Write a customer review</h5>
+              <h4 style={{marginTop:"100px"}}>Write a customer review</h4>
               {userInfo ? (
                 <form onSubmit={submitHandler}>
                   <ul className="form-container">
@@ -153,7 +160,6 @@ function Product(props) {
               )}
             </li>
           </ul>
-        </div>
         </div>
         </div>
         </div>
