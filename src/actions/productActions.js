@@ -124,7 +124,7 @@ export const deleteProduct = (product) => async (dispatch, getState) => {
 export const detailsProduct = (productId) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
-    const { data } = await axios.get('/api/products/' + productId);
+    const { data } = await axios.get('https://gamerdotcom.herokuapp.com/api/products/' + productId);
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_DETAILS_FAIL, payload: error.message });
@@ -138,7 +138,7 @@ export const saveProduct = (product) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     if (!product._id) {
-      const { data } = await Axios.post('/api/products', product, {
+      const { data } = await Axios.post('https://gamerdotcom.herokuapp.com/api/products', product, {
         headers: {
           Authorization: 'Bearer ' + userInfo.token,
         },
@@ -170,7 +170,7 @@ export const saveProductReview = (productId, review) => async (dispatch, getStat
     } = getState();
     dispatch({ type: PRODUCT_REVIEW_SAVE_REQUEST, payload: review });
     const { data } = await axios.post(
-      `/api/products/${productId}/reviews`,
+      `https://gamerdotcom.herokuapp.com/api/products/${productId}/reviews`,
       review,
       {
         headers: {
