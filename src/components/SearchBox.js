@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 function SearchBox(props) {
   const [name, setName] = useState('');
   const [order, setOrder] = useState('');
-  
+
   useEffect(() => {
     if(order){
       props.history.push(`/search/name/${name}?sortOrder=${order}`);
@@ -34,9 +34,8 @@ function SearchBox(props) {
           id="q"
           onChange={(e) => setName(e.target.value)}
         />
-         <SearchIcon onClick={submitHandler}className="header__searchIcon" />
-         Sort By{' '}
-          <select name="sortOrder" style={{marginRight:"20px"}} onChange={(e)=>
+         <SearchIcon onClick={submitHandler}className="header__searchIcon" style={{marginRight:"15px"}} />
+          <select name="sortOrder" style={{marginRight:"10px", height:"30px", color:"#eb6864"}} onChange={(e)=>
             {setOrder(e.target.value)}}>
             <option value="newest">Newest</option>
             <option value="lowest">Lowest</option>
