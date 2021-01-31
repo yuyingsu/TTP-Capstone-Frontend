@@ -22,7 +22,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({ type: CREATE_ORDER_REQUEST, payload: order });
     const { userSignin: { userInfo } } = getState();
-    const { data: { data: newOrder } } = await Axios.post("http://localhost:5000/api/orders", order, {
+    const { data: { data: newOrder } } = await Axios.post("https://gamerdotcom.herokuapp.com/api/orders", order, {
       headers: {
         Authorization: ' Bearer ' + userInfo.token
       }
@@ -40,7 +40,7 @@ export const listMyOrder = (order_id) =>  (dispatch,getState) => {
       type: LIST_MY_ORDER_REQUEST,
     })
     const { userSignin: { userInfo } } = getState();
-    fetch('http://localhost:5000/api/orders/' + order_id, {
+    fetch('https://gamerdotcom.herokuapp.com/api/orders/' + order_id, {
       headers: {
         'content-type': 'application/json',
         Authorization: 'Bearer ' + userInfo.token
@@ -63,7 +63,7 @@ export const listAllOrder = () => (dispatch, getState) => {
     type: FETCH_ORDER_REQUEST
   })
   const { userSignin: { userInfo } } = getState();
-  fetch('http://localhost:5000/api/orders', {
+  fetch('https://gamerdotcom.herokuapp.com/api/orders', {
     headers: {
       'content-type': 'application/json',
       Authorization: 'Bearer ' + userInfo.token
@@ -82,7 +82,7 @@ export const listAllOrder = () => (dispatch, getState) => {
 
 export const deleteOrder = (order) => (dispatch, getState) => {
   const { userSignin: { userInfo } } = getState();
-  fetch('http://localhost:5000/api/orders/' + order._id, {
+  fetch('https://gamerdotcom.herokuapp.com/api/orders/' + order._id, {
     method: 'DELETE',
     headers: {
       'content-type': 'application/json',
@@ -103,7 +103,7 @@ export const deleteOrder = (order) => (dispatch, getState) => {
 export const deliverOrder = (order) => (dispatch, getState) => {
   try {
     const { userSignin: { userInfo } } = getState();
-    fetch('http://localhost:5000/api/orders/'+order._id+"/deliver",{
+    fetch('https://gamerdotcom.herokuapp.com/api/orders/'+order._id+"/deliver",{
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -128,7 +128,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
   try {
     dispatch({ type: MY_ORDER_LIST_REQUEST });
     const { userSignin: { userInfo } } = getState();
-    const { data } = await Axios.get("http://localhost:5000/api/orders/mine", {
+    const { data } = await Axios.get("https://gamerdotcom.herokuapp.com/api/orders/mine", {
       headers:
         { Authorization: 'Bearer ' + userInfo.token }
     });
@@ -142,7 +142,7 @@ export const payOrder = (order, paymentResult) => async (dispatch, getState) => 
   dispatch({ type: ORDER_PAY_REQUEST, payload: { order, paymentResult } });
   const { userSignin: { userInfo } } = getState();
   try {
-    const { data } = Axios.put(`http://localhost:5000/api/orders/${order._id}/pay`, paymentResult, {
+    const { data } = Axios.put(`https://gamerdotcom.herokuapp.com/api/orders/${order._id}/pay`, paymentResult, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: ORDER_PAY_SUCCESS, payload: data });

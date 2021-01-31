@@ -8,7 +8,7 @@ import {
 
 export const addToCart = (product_id, qty) =>  (dispatch) => {
   try {
-    fetch('http://localhost:5000/api/products/' + product_id).
+    fetch('https://gamerdotcom.herokuapp.com/api/products/' + product_id).
     then(res => res.json()).then(data => {
       dispatch({
         type: ADD_TO_CART,
