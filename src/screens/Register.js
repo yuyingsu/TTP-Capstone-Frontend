@@ -31,7 +31,7 @@ function Register(props) {
     dispatch(exitRegister());
   }
 
-  return <div className="form">
+  return <div className="form mt-4">
     {!success?<form onSubmit={submitHandler} >
       <ul className="form-container">
         <li>

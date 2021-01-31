@@ -24,11 +24,11 @@ function Signin(props) {
     dispatch(signin(email, password));
   }
 
-  return <div className="form">
+  return <div className="form mt-4">
     <form onSubmit={submitHandler} >
       <ul className="form-container">
         <li>
-          <h2>Sign-In</h2>
+          <h2>Sign In</h2>
         </li>
         <li>
           {loading && <div>Loading...</div>}
