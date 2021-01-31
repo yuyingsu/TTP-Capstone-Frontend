@@ -23,7 +23,7 @@ export const listProducts = (page, searchKeyword, sortOrder) => dispatch => {
     dispatch({
      type: FETCH_PRODUCT_PAGE_REQUEST
     });
-    fetch('http://localhost:5000/api/products?page=' + page +
+    fetch('https://gamerdotcom.herokuapp.com/api/products?page=' + page +
     '&searchKeyword=' + searchKeyword + '&sortOrder=' + sortOrder)
     .then(res => res.json())
     .then(res => {
@@ -42,7 +42,7 @@ export const listAllProducts = () => dispatch => {
   dispatch({
     type: FETCH_PRODUCT_REQUEST
   });
-  fetch('http://localhost:5000/api/products')
+  fetch('https://gamerdotcom.herokuapp.com/api/products')
   .then(res => res.json())
     .then(products =>
       dispatch({
@@ -57,7 +57,7 @@ export const addEditProduct = (product) => async (dispatch, getState) => {
   try {
     const { userSignin: { userInfo } } = getState();
     if (!product._id) {
-      fetch('http://localhost:5000/api/products', {
+      fetch('https://gamerdotcom.herokuapp.com/api/products', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -74,7 +74,7 @@ export const addEditProduct = (product) => async (dispatch, getState) => {
       )
      .catch(error => console.log(error));
     } else {
-      fetch('http://localhost:5000/api/products/' + product._id, {
+      fetch('https://gamerdotcom.herokuapp.com/api/products/' + product._id, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -99,7 +99,7 @@ export const addEditProduct = (product) => async (dispatch, getState) => {
 export const deleteProduct = (product) => async (dispatch, getState) => {
   try {
     const { userSignin: { userInfo } } = getState();
-    fetch('http://localhost:5000/api/products/' + product._id, {
+    fetch('https://gamerdotcom.herokuapp.com/api/products/' + product._id, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
