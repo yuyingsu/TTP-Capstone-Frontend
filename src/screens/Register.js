@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../actions/userActions';
 import RegisterSuccess from '../components/RegisterSuccess';
+import { Button } from 'reactstrap';
 
 function Register(props) {
 
@@ -66,7 +67,7 @@ function Register(props) {
           </input>
         </li>
         <li>
-          <button type="submit" className="button primary">Register</button>
+          <Button type="submit" className="button primary">Register</Button>
         </li>
         <li>
           Already have an account?

@@ -124,7 +124,7 @@ export default function Order(props) {
                     <span>{"Qty: " + item.qty}</span>
                   </div>
 
-                  <div class="total-price ml-auto"><span><h5>{"$" + item.price*item.qty}</h5></span>
+                  <div class="total-price ml-auto"><span><h5>{"$" + (item.price * item.qty).toFixed(2)}</h5></span>
                   </div>
 
                 </div>
@@ -177,18 +177,6 @@ export default function Order(props) {
                   ></PayPalButton>
                 </li>
               }
-              {userInfo?
-              userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
-                <li>
-                  <Button
-                    type="button"
-                    className="primary block"
-                    onClick={deliverHandler}
-                  >
-                    Deliver Order
-                  </Button>
-                </li>
-              ):null}
             </ul>
           </div>
         </div>
