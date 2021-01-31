@@ -42,6 +42,7 @@ export default function Order(props) {
     if (
       !myOrder ||
       successPay ||
+      myOrder.isDelivered ||
       (myOrder && myOrder._id !== orderId)
     ) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -63,6 +64,7 @@ export default function Order(props) {
   };
   const deliverHandler = () => {
     dispatch(deliverOrder(myOrder));
+    dispatch(listMyOrder(orderId));
   };
   return (success ? <div>
       <br />
@@ -93,7 +95,7 @@ export default function Order(props) {
               <div className="card card-body">
                 <h2>Payment</h2>
                 <p>
-                  <strong>Method:</strong> {myOrder.paymentMethod}
+                  <strong>Method:</strong> {myOrder.payment.paymentMethod}
                 </p>
                 {myOrder.isPaid ? (
                     <h5>Paid at {myOrder.paidAt}</h5>
@@ -166,25 +168,18 @@ export default function Order(props) {
                 </div>
               </li>
               <br />
-              {!myOrder.isPaid && (
+              {!myOrder.isPaid &&
                 <li>
-                  {!sdkReady ? (
-                    <p>Loading...</p>
-                  ) : (
-                    <p>
-                      {errorPay && (
-                        {errorPay}
-                      )}
-                      {loadingPay && "Loading..."}
+
 
                       <PayPalButton
                         amount={myOrder.totalPrice.toFixed(2)}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton>
-                    </p>
-                  )}
+
+
                 </li>
-              )}
+              }
               {userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
                 <li>
                   <Button
