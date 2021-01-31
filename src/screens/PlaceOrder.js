@@ -7,44 +7,36 @@ import { Button } from 'reactstrap';
 import CartItem from '../components/CartItem';
 
 function PlaceOrder(props) {
-
   const cart = useSelector(state => state.ct);
   const orderCreate = useSelector(state => state.createOrder);
   const { success, order, loading } = orderCreate;
   const { carts, shipping, payment } = cart;
+
   if (!shipping.address) {
     props.history.push("/shipping");
   } else if (!payment.paymentMethod) {
     props.history.push("/payment");
   }
+
   const itemsPrice = carts.reduce((a, c) => a + c.price * c.qty, 0);
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
   const taxPrice = 0.15 * itemsPrice;
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
-  const userSignin = useSelector(state => state.userSignin);
-  const { userInfo } = userSignin;
 
   const dispatch = useDispatch();
 
   const placeOrderHandler = () => {
-    // create an order
     dispatch(createOrder({
       orderItems: carts, shipping, payment, itemsPrice, shippingPrice,
       taxPrice, totalPrice
     }));
   }
-  //console.log(loading);
-  //console.log(success);
+
   useEffect(() => {
     if (success) {
       props.history.push("/order/" + order._id);
     }
-
   }, [success]);
-
-  let res = carts.map((cart)=>(
-    <CartItem cart={cart}/>
-  ));
 
   return (
     <div>
@@ -74,26 +66,26 @@ function PlaceOrder(props) {
               <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
-                  {                carts.map(item =>
-                  <div class="item">
+                  {carts.map(item =>
+                    <div class="item">
 
-                  <div class="image">
-                      <img src={item.image} style={{height:"100px", width:"100px"}}/>
-                  </div>
+                      <div class="image">
+                          <img src={item.image} style={{height:"100px", width:"100px"}}/>
+                      </div>
 
-                  <div class="description">
-                      <h5><Link to={`/product/${item._id}`}><span>{item.name}</span></Link></h5>
-                  </div>
+                      <div class="description">
+                          <h5><Link to={`/product/${item._id}`}><span>{item.name}</span></Link></h5>
+                      </div>
 
-                  <div class="quantity">
-                    <span>{"Qty: " + item.qty}</span>
-                  </div>
+                      <div class="quantity">
+                        <span>{"Qty: " + item.qty}</span>
+                      </div>
 
-                  <div class="total-price ml-auto"><span><h5>{"$" + item.price*item.qty}</h5></span>
-                  </div>
+                      <div class="total-price ml-auto"><span><h5>{"$" + item.price*item.qty}</h5></span>
+                      </div>
 
-                </div>
-                )}
+                    </div>
+                  )}
                 </ul>
               </div>
             </li>
@@ -134,6 +126,7 @@ function PlaceOrder(props) {
                 </div>
               </li>
               <li>
+              <br />
                 <Button
                   type="button"
                   onClick={placeOrderHandler}

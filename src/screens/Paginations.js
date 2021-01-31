@@ -1,66 +1,68 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Button, Pagination, PaginationItem } from 'reactstrap';
-class Paginations extends Component {
 
-    goToFirst = () =>{
-        this.props.setPage(1);
+class Paginations extends Component {
+  goToFirst = () => {
+      this.props.setPage(1);
+  }
+  goToLast = () => {
+    this.props.setPage(this.props.length);
+  }
+  goBack = () =>{
+    if (this.props.page > 1) {
+      this.props.setPage(this.props.page - 1);
+      }
     }
-    goToLast = () =>{
-        this.props.setPage(this.props.length);
+  moveForward = () => {
+    if (this.props.page < this.props.length) {
+      this.props.setPage(this.props.page + 1);
     }
-    goBack = () =>{
-        if(this.props.page>1){
-            this.props.setPage(this.props.page-1);
-        }
-    }
-    moveForward = () =>{
-        if(this.props.page<this.props.length){
-            this.props.setPage(this.props.page+1);
-        }
-    }
-    goToPage = (num) =>{
-        this.props.setPage(num);
-    }
-    render() {
+  }
+  goToPage = (num) => {
+    this.props.setPage(num);
+  }
+
+  render() {
     let array = new Array(3);
-    if(this.props.page % 3 == 1){
-        if(this.props.page == this.props.length){
-            array=[this.props.page];
-        }else{
-        array=[this.props.page, this.props.page+1, this.props.page+2];
+    if (this.props.page % 3 == 1) {
+      if (this.props.page == this.props.length) {
+        array=[this.props.page];
+      } else {
+        array=[this.props.page, this.props.page + 1, this.props.page + 2];
+      }
+    } else if (this.props.page % 3 == 2) {
+      if (this.props.page == this.props.length){
+        array=[this.props.page - 1, this.props.page];
+      } else {
+        array=[this.props.page - 1, this.props.page, this.props.page + 1];
         }
-    }else if(this.props.page % 3 == 2){
-        if(this.props.page == this.props.length){
-            array=[this.props.page-1, this.props.page];
-        }else{
-        array=[this.props.page-1, this.props.page, this.props.page+1];
-        }
-    }else{
-        array=[this.props.page-2, this.props.page-1, this.props.page];
+    } else {
+      array=[this.props.page - 2, this.props.page - 1, this.props.page];
     }
-    const pages = array.map((num)=>(
-        <PaginationItem>
+    const pages = array.map((num) => (
+      <PaginationItem>
         <Button onClick={()=>{this.goToPage(num)}}>{num}</Button>
-        </PaginationItem>
+      </PaginationItem>
     ));
+
     return (
-        <div>
-            <Pagination aria-label="Page navigation example">
-            <PaginationItem>
+      <div>
+        <Pagination aria-label="Page navigation example">
+          <PaginationItem>
             <Button onClick={this.goToFirst}>{"<<"}</Button>
-            </PaginationItem>
-            <PaginationItem>
+          </PaginationItem>
+          <PaginationItem>
             <Button onClick={this.goBack}>{"<"}</Button>
-            </PaginationItem>
+          </PaginationItem>
             {pages}
-            <PaginationItem>
+          <PaginationItem>
             <Button onClick={this.moveForward}>{">"}</Button>
-            </PaginationItem>
-            <PaginationItem>
+          </PaginationItem>
+          <PaginationItem>
             <Button onClick={this.goToLast}>{">>"}</Button>
-            </PaginationItem>
-            </Pagination>
-        </div>
+          </PaginationItem>
+        </Pagination>
+      </div>
     );
   }
 }

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { logout, update } from '../actions/userActions';
-//import { listMyOrders } from '../actions/orderActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Row } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 function Profile(props) {
   const [name, setName] = useState('');
@@ -17,15 +15,15 @@ function Profile(props) {
     dispatch(logout());
     props.history.push("/signin");
   }
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(update({ userId: userInfo._id, email, name, password }))
   }
+
   const userUpdate = useSelector(state => state.userUpdate);
   const { loading, success, error } = userUpdate;
 
-  //const myOrderList = useSelector(state => state.myOrderList);
-  //const { loading: loadingOrders, orders, error: errorOrders } = myOrderList;
   useEffect(() => {
     if (userInfo) {
       console.log(userInfo.name)
@@ -33,13 +31,10 @@ function Profile(props) {
       setName(userInfo.name);
       setPassword(userInfo.password);
     }
-    //dispatch(listMyOrders());
-    return () => {
-
-    };
+    return () => {};
   }, [userInfo])
 
-  return <div className="profile">
+  return <div className="profile mt-4">
     <div className="profile-info">
       <div className="form">
         <form onSubmit={submitHandler} >

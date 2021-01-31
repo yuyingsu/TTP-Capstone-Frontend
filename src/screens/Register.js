@@ -15,16 +15,14 @@ function Register(props) {
   const { loading, userInfo, error } = userRegister;
   const dispatch = useDispatch();
   const redirect = '/';
-  console.log(userInfo);
+
   useEffect(() => {
     if(userInfo)
     {
       setSuccess(true);
       setTimeout(function(){ props.history.push(redirect)} , 5000);
     }
-    return () => {
-      //
-    };
+    return () => {};
   }, [userInfo]);
 
   const submitHandler = (e) => {
@@ -32,6 +30,7 @@ function Register(props) {
     dispatch(register(name, email, password));
     dispatch(exitRegister());
   }
+
   return <div className="form">
     {!success?<form onSubmit={submitHandler} >
       <ul className="form-container">
@@ -72,11 +71,10 @@ function Register(props) {
         <li>
           Already have an account?
           <Link to={redirect === "/" ? "signin" : "signin?redirect=" + redirect} className="button secondary text-center" >Sign In</Link>
-
         </li>
-
       </ul>
     </form>:<RegisterSuccess/>}
   </div>
 }
+
 export default Register;

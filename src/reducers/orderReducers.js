@@ -16,7 +16,7 @@ import {
   ORDER_PAY_REQUEST,
   ORDER_PAY_RESET,
   ORDER_PAY_SUCCESS,
- } from '../constants/orderConstants';
+} from '../constants/orderConstants';
 
 function createOrderReducer(state = {}, action) {
   switch (action.type) {
@@ -26,20 +26,6 @@ function createOrderReducer(state = {}, action) {
       return { loading: false, order: action.payload, success: true };
     case CREATE_ORDER_FAIL:
       return { loading: false, error: action.payload };
-    default: return state;
-  }
-}
-function listMyOrderReducer(state = {}, action){
-  switch(action.type){
-    case LIST_MY_ORDER_REQUEST:
-      return { loading:true };
-    case LIST_MY_ORDER:
-      return {
-        ...state,
-        myOrder: action.payload,
-        loading: false,
-        success: true
-      }
     default: return state;
   }
 }
@@ -63,10 +49,24 @@ function listAllOrderReducer(state = {}, action){
         orders: state.orders.filter(item => item._id !== action.payload._id)
       }
     case DELIVER_ORDER:
-      console.log(action.payload);
       return {
         ...state,
         orders: state.orders.map(item => item._id != action.payload._id ? item:action.payload)
+      }
+    default: return state;
+  }
+}
+
+function listMyOrderReducer(state = {}, action) {
+  switch(action.type){
+    case LIST_MY_ORDER_REQUEST:
+      return { loading:true };
+    case LIST_MY_ORDER:
+      return {
+        ...state,
+        myOrder: action.payload,
+        loading: false,
+        success: true
       }
     default: return state;
   }
@@ -103,8 +103,8 @@ const orderPayReducer = (state = {}, action) => {
 
 export {
   createOrderReducer,
-  listMyOrderReducer,
   listAllOrderReducer,
+  listMyOrderReducer,
   myOrderListReducer,
   orderPayReducer
 }

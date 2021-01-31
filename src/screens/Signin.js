@@ -1,24 +1,22 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signin } from '../actions/userActions';
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Column} from 'reactstrap';
+import { Button } from 'reactstrap';
 
 function Signin(props) {
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const userSignin = useSelector(state => state.userSignin);
   const { loading, userInfo, error } = userSignin;
   const dispatch = useDispatch();
   const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
+
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);
     }
-    return () => {
-      //
-    };
+    return () => {};
   }, [userInfo]);
 
   const submitHandler = (e) => {
@@ -61,4 +59,5 @@ function Signin(props) {
     </form>
   </div>
 }
+
 export default Signin;

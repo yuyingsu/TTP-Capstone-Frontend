@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { addToCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import CartItem from '../components/CartItem';
@@ -18,32 +18,31 @@ function Cart(props) {
       dispatch(addToCart(productId, qty));
     }
   }, []);
+
   let res = carts.map((cart)=>(
     <CartItem cart={cart}/>
   ));
 
   const checkoutHandler = () => {
-    console.log(props)
     props.history.push("/signin?redirect=shipping");
-    //console.log(props)
   }
-  console.log(carts);
-  return(
+
+  return (
     <div>
-    <div class="shopping-cart">
-      <div class="title">Shopping Bag</div>
-      {res}
+      <div class="shopping-cart">
+        <div class="title">Shopping Bag</div>
+        {res}
+        </div>
+      <div className="cart-action">
+        <h5>
+          Subtotal ({carts.reduce((a, c) => a + c.qty, 0)} items):
+          ${carts.reduce((a, c) => a + c.price * c.qty, 0)}
+        </h5>
+        <Button onClick={checkoutHandler} className="button primary full-width" disabled={carts.length === 0}>
+          Proceed to Checkout
+        </Button>
+      </div>
     </div>
-    <div className="cart-action">
-    <h5>
-      Subtotal ({carts.reduce((a, c) => a + c.qty, 0)} items):
-       ${carts.reduce((a, c) => a + c.price * c.qty, 0)}
-    </h5>
-    <Button onClick={checkoutHandler} className="button primary full-width" disabled={carts.length === 0}>
-      Proceed to Checkout
-    </Button>
-  </div>
-  </div>
   );
 }
 

@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { savePayment } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { Button } from 'reactstrap';
 
-function PaymentScreen(props) {
+function Payment(props) {
   const [paymentMethod, setPaymentMethod] = useState('');
-
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -15,6 +13,7 @@ function PaymentScreen(props) {
     dispatch(savePayment({ paymentMethod }));
     props.history.push('placeorder');
   };
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
@@ -49,4 +48,5 @@ function PaymentScreen(props) {
     </div>
   );
 }
-export default PaymentScreen;
+
+export default Payment;

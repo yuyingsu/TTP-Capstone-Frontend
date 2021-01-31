@@ -4,14 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deliverOrder, listMyOrder, payOrder } from '../actions/orderActions';
-import {
-  ORDER_PAY_RESET,
-} from '../constants/orderConstants';
+import { ORDER_PAY_RESET } from '../constants/orderConstants';
 import { Button } from 'reactstrap';
 
 export default function Order(props) {
   const orderId = props.match.params.id;
-  console.log(orderId)
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.listMyOrder);
   const dispatch = useDispatch();
@@ -46,7 +43,6 @@ export default function Order(props) {
       (myOrder && myOrder._id !== orderId)
     ) {
       dispatch({ type: ORDER_PAY_RESET });
-      //dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(listMyOrder(orderId));
     } else {
       if (!myOrder.isPaid) {
@@ -62,11 +58,14 @@ export default function Order(props) {
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(myOrder, paymentResult));
   };
+
   const deliverHandler = () => {
     dispatch(deliverOrder(myOrder));
     dispatch(listMyOrder(orderId));
   };
-  return (success ? <div>
+
+  return (success ?
+    <div>
       <br />
       <h1>Order {myOrder._id}</h1>
       <div className="row top" style={{margin: "0px"}}>
@@ -78,7 +77,8 @@ export default function Order(props) {
                 <p>
                   {myOrder.shipping.fullName} <br />
                   {myOrder.shipping.address}<br />
-                  {myOrder.shipping.address2 && myOrder.shipping.address2}{myOrder.shipping.address2 && <br />}
+                  {myOrder.shipping.address2 && myOrder.shipping.address2}
+                  {myOrder.shipping.address2 && <br />}
                   {myOrder.shipping.city},{' '}
                   {myOrder.shipping.state + " " + myOrder.shipping.zip}
                 </p>
@@ -108,7 +108,7 @@ export default function Order(props) {
                 <div className="card card-body">
                 <h2>Order Items</h2>
                 <ul>
-                  {                myOrder.orderItems.map(item =>
+                  {myOrder.orderItems.map(item =>
                   <div class="item">
 
                   <div class="image">
@@ -170,14 +170,10 @@ export default function Order(props) {
               <br />
               {!myOrder.isPaid &&
                 <li>
-
-
-                      <PayPalButton
-                        amount={myOrder.totalPrice.toFixed(2)}
-                        onSuccess={successPaymentHandler}
-                      ></PayPalButton>
-
-
+                  <PayPalButton
+                    amount={myOrder.totalPrice.toFixed(2)}
+                    onSuccess={successPaymentHandler}
+                  ></PayPalButton>
                 </li>
               }
               {userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
@@ -195,5 +191,6 @@ export default function Order(props) {
           </div>
         </div>
       </div>
-    </div> : null );
+    </div> : null
+  );
 }

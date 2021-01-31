@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { logout, update } from '../actions/userActions';
 import { listMyOrders } from '../actions/orderActions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,17 +7,15 @@ function MyOrders(props) {
   const dispatch = useDispatch();
   const myOrderList = useSelector(state => state.myOrderList);
   const { loading: loadingOrders, orders, error: errorOrders } = myOrderList;
+
   useEffect(() => {
     dispatch(listMyOrders());
-    return () => {
-
-    };
+    return () => {};
   }, [])
 
   return <div className="profile-orders content-margined">
-{
-  loadingOrders ? <div>Loading...</div> :
-    errorOrders ? <div>{errorOrders} </div> :
+  { loadingOrders ? <div>Loading...</div> :
+    errorOrders ? <div>{errorOrders}</div> :
       <table className="table">
         <thead>
           <tr>
@@ -41,8 +38,8 @@ function MyOrders(props) {
           </tr>)}
         </tbody>
       </table>
-}
-</div>
+  }
+  </div>
 }
 
 export default MyOrders;

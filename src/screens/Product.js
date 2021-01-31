@@ -27,13 +27,11 @@ function Product(props) {
       dispatch({ type: PRODUCT_REVIEW_SAVE_RESET });
     }
     dispatch(detailsProduct(props.match.params.id));
-    return () => {
-      //
-    };
+    return () => {};
   }, [productSaveSuccess]);
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch actions
+
     dispatch(
       saveProductReview(props.match.params.id, {
         name: userInfo.name,
@@ -46,126 +44,124 @@ function Product(props) {
     props.history.push('/cart/' + props.match.params.id + '?qty=' + qty);
   };
 
-  //console.log("product" + JSON.stringify(product))
-    return (
-      <div className="product-page">
-      {loading ? (
-        <Spinners status="loading" />
-      ) : error ? (
-        <div>{error} </div>
-      ) : (
-      <div className="product">
-        <div className="photo-gallery">
-          <img src={product.image} style={{height: "450px", width: "450px"}} alt="game pic" />
+  return (
+    <div className="product-page">
+    {loading ? (
+      <Spinners status="loading" />
+    ) : error ? (
+      <div>{error} </div>
+    ) : (
+    <div className="product">
+      <div className="photo-gallery">
+        <img src={product.image} style={{height: "450px", width: "450px"}} alt="game pic" />
+      </div>
+      <div class="container">
+        <div class="row">
+        <div class="col-sm">
+        <table style={{marginLeft:"100px", marginTop:"40px"}}>
+          <caption><h5>{product.name}</h5></caption>
+          <tr>
+          <th>Brand</th>
+          <td>{product.brand}</td>
+          </tr>
+          <tr>
+          <th>Rating</th>
+          <td><Rating value={product.rating} /></td>
+          </tr>
+          <tr>
+          <th>Reviews</th>
+          <td>{product.numReviews}</td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>{product.description}</td>
+          </tr>
+        </table>
         </div>
-        <div class="container">
-          <div class="row">
-          <div class="col-sm">
-          <table style={{marginLeft:"100px", marginTop:"40px"}}>
-            <caption><h5>{product.name}</h5></caption>
-            <tr>
-            <th>Brand</th>
-            <td>{product.brand}</td>
-            </tr>
-            <tr>
-            <th>Rating</th>
-            <td><Rating value={product.rating} /></td>
-            </tr>
-            <tr>
-            <th>Reviews</th>
-            <td>{product.numReviews}</td>
-            </tr>
-            <tr>
-              <th>Description</th>
-              <td>{product.description}</td>
-            </tr>
-          </table>
+        <div class="col-sm">
+        <span className="cartbttn">
+          <select onChange={(e)=>{setQty(e.target.value)}} style={{marginTop:"120px"}}>
+          {[...Array(product.countInStock).keys()].slice(0,10).map(x =>
+            <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
+          )}
+          </select>
+          <div>
+          <Button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"0px"}}>
+            Add to Cart
+          </Button>
           </div>
-          <div class="col-sm">
-          <span className="cartbttn">
-            <select onChange={(e)=>{setQty(e.target.value)}} style={{marginTop:"120px"}}>
-            {[...Array(product.countInStock).keys()].slice(0,10).map(x =>
-                <option key={x + 1} value={x + 1}>Qty: {x + 1}</option>
-                      )}
-            </select>
-            <div>
-            <Button type="button" onClick={handleAddToCart} style={{marginTop:"20px", marginLeft:"0px"}}>
-              Add to Cart
-            </Button>
-            </div>
-          </span>
-          </div>
-          </div>
-          <div class="row">
-          <div class="col">
-          <div style={{marginRight:"450px"}}>
-          <div className="content-margined">
-            <h5 style={{marginTop:"300px"}}>Reviews</h5>
-            {!product.reviews.length && <div>There is no review</div>}
-            <ul className="review" id="reviews">
-              {product.reviews.map((review) => (
-                <li key={review._id}>
-                  <div>{review.name}</div>
-                  <div>
-                    {console.log(JSON.stringify(review))}
-                    <Rating value={review.rating}></Rating>
-                  </div>
-                  <div>{review.createdAt.substring(0, 10)}</div>
-                  <div>{review.comment}</div>
-                </li>
-              ))}
-              <li>
-                <h5>Write a customer review</h5>
-                {userInfo ? (
-                  <form onSubmit={submitHandler}>
-                    <ul className="form-container">
-                      <li>
-                        <label htmlFor="rating">Rating</label><br/>
-                        <select
-                          name="rating"
-                          id="rating"
-                          value={rating}
-                          onChange={(e) => setRating(e.target.value)}
-                        >
-                          <option value="1">1 - Poor</option>
-                          <option value="2">2 - Fair</option>
-                          <option value="3">3 - Good</option>
-                          <option value="4">4 - Very Good</option>
-                          <option value="5">5 - Excellent</option>
-                        </select>
-                      </li>
-                      <li>
-                        <label htmlFor="comment">Comment</label><br/>
-                        <textarea
-                          name="comment"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></textarea>
-                      </li>
-                      <li>
-                        <Button type="submit" className="button primary">
-                          Submit
-                        </Button>
-                      </li>
-                    </ul>
-                  </form>
-                ) : (
-                  <div>
-                    Please <Link to="/signin">Sign In</Link> to write a review.
-                  </div>
-                )}
+        </span>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col">
+        <div style={{marginRight:"450px"}}>
+        <div className="content-margined">
+          <h5 style={{marginTop:"300px"}}>Reviews</h5>
+          {!product.reviews.length && <div>There is no review</div>}
+          <ul className="review" id="reviews">
+            {product.reviews.map((review) => (
+              <li key={review._id}>
+                <div>{review.name}</div>
+                <div>
+                  {console.log(JSON.stringify(review))}
+                  <Rating value={review.rating}></Rating>
+                </div>
+                <div>{review.createdAt.substring(0, 10)}</div>
+                <div>{review.comment}</div>
               </li>
-            </ul>
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
-          </div>
-      )}
+            ))}
+            <li>
+              <h5>Write a customer review</h5>
+              {userInfo ? (
+                <form onSubmit={submitHandler}>
+                  <ul className="form-container">
+                    <li>
+                      <label htmlFor="rating">Rating</label><br/>
+                      <select
+                        name="rating"
+                        id="rating"
+                        value={rating}
+                        onChange={(e) => setRating(e.target.value)}
+                      >
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Good</option>
+                        <option value="4">4 - Very Good</option>
+                        <option value="5">5 - Excellent</option>
+                      </select>
+                    </li>
+                    <li>
+                      <label htmlFor="comment">Comment</label><br/>
+                      <textarea
+                        name="comment"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                      ></textarea>
+                    </li>
+                    <li>
+                      <Button type="submit" className="button primary mb-4">
+                        Submit
+                      </Button>
+                    </li>
+                  </ul>
+                </form>
+              ) : (
+                <div>
+                  Please <Link to="/signin">Sign In</Link> to write a review.
+                </div>
+              )}
+            </li>
+          </ul>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    )}
     </div>
-
-    );
+  );
 }
 
 export default Product;
