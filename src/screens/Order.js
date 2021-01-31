@@ -176,17 +176,6 @@ export default function Order(props) {
                   ></PayPalButton>
                 </li>
               }
-              {userInfo.isAdmin && myOrder.isPaid && !myOrder.isDelivered && (
-                <li>
-                  <Button
-                    type="button"
-                    className="primary block"
-                    onClick={deliverHandler}
-                  >
-                    Deliver Order
-                  </Button>
-                </li>
-              )}
             </ul>
           </div>
         </div>
