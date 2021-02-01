@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalForm from '../components/ModalForm';
-import { Table, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
+import { Table } from "react-bootstrap";
+import "bootstrap/js/src/collapse.js";
 import { deleteProduct } from '../actions/productActions';
 
 function Products(props) {
@@ -13,14 +15,18 @@ function Products(props) {
   }
 
   let lists = products.map((product) => (
-    <tr key={product._id}>
+    <Fragment>
+    <tr key={product._id}
+        data-toggle="collapse"
+        data-target={`.multi-collapse-${product._id}`}
+        aria-controls={`multiCollapse-${product._id}`}>
       <td><Link to={'/product/' + product._id}>{product._id}</Link></td>
       <td>{product.name}</td>
       <td>{"$" + product.price}</td>
       <td>{product.countInStock}</td>
       <td>{product.image}</td>
       <td>{product.brand}</td>
-      <td>{product.description}</td>
+      <td>{"Expand to View"}</td>
       <td>
       <div style={{width:"160px"}}>
           <ModalForm buttonLabel={"Edit"} product={product}/>
@@ -29,6 +35,10 @@ function Products(props) {
         </div>
       </td>
     </tr>
+               <tr class={`collapse multi-collapse-${product._id}`} id={`multiCollapseExample-${product._id}`}>
+               <td>{product.description}</td>
+           </tr>
+           </Fragment>
   ));
 
   let res = (
